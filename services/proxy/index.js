@@ -6,10 +6,10 @@ const config = require('../../pkg/config');
 const app = express();
 
 app.use(
-    '',
+    '/api/v1/auth',
     proxy(
         'http://localhost:10001',
-        { proxyReqPathResolve: (req) => `http://localhost:10001////${req.url}` }
+        { proxyReqPathResolve: (req) => `http://localhost:10001/api/v1/auth/${req.url}` }
     )
 );
 app.use(
