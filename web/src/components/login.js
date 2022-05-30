@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-const Login = () => {
+
+export function Login() {
     const formDataInit = {
         email: "",
         password: ""
@@ -50,4 +51,3 @@ const Login = () => {
     )
 }
 
-export default Login;
