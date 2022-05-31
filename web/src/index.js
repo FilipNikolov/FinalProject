@@ -22,7 +22,7 @@ root.render(
         <Route path="/lunch" element={<Lunch />} />
         <Route path="/dinner" element={<Dinner />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/creatacc" element={<CreateAcc />} />
+        <Route path="/register" element={<CreateAcc />} />
       </Route>
     </Routes>
   </Router>

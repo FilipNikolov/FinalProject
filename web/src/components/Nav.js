@@ -10,8 +10,8 @@ export const Nav = () => {
             <li><Link to="/brunch">Brunch</Link></li>
             <li><Link to="/lunch">Lunch</Link></li>
             <li><Link to="/dinner">Dinner</Link></li>
-            <li><Link to="/login">Log In</Link></li>
-            <li><Link to="/creatacc">Create Account</Link></li>
+            <li id="login"><Link to="/login">Log In</Link></li>
+            <li id="register"><Link to="/register">Create Account</Link></li>
         </ul>
     )
 }

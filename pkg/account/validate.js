@@ -6,7 +6,7 @@ const Account = {
     email: 'required|email',
     password: 'required|string',
     repeat_password: 'required|string',
-    birthday: 'required|integer',
+    birthday: 'required|date',
 };
 
 const AccountLogin = {

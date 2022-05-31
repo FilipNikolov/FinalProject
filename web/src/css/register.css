@@ -1,4 +1,18 @@
-#register{
-    display: flex;
-    justify-content: space-betweens;
+*{
+  box-sizing: border-box;
+   padding: 0px;
+   margin: 0px;
+ 
+}
+#registercontainer{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+   width: 100%;
+  height: 600px;
+  border: 1px solid black;
+}
+
+.acctext p {
+  width:300px;
 }

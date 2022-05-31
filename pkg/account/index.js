@@ -8,7 +8,7 @@ const account = mongoose.model(
         email: String,
         password: String,
         repeat_password: String,
-        birthday: Number
+        birthday: Date
     },
     'accounts'
 );

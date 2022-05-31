@@ -1,5 +1,44 @@
+@import url(https://fonts.google.com/specimen/Roboto#standard-styles);
+*{
+   box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+}
+body{
+
+    background-color: #F8F7F2;
+}
+a {
+    text-decoration: none;
+    color: #A5A5A5;
+    font-family: 'Roboto', sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;    
+    font-size: 16px;
+    letter-spacing: 21;
+}
 #nav{
+    padding: 50px 200px;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+}
+#nav #login {
+    padding: 15px 21px;
+    border: 1px solid #A5A5A5;
+    border-radius: 3px;
+    color: grey;
+   
+}
+
+#nav #register {
+    background-color: #96BB36;
+    padding: 15px 21px;
+    border: 1px solid #A5A5A5;
+    border-radius: 5px;
+    box-shadow: 0px 3px 6px #00000029;
+    
+}
+#nav #register a{
+    color: white;
 }
