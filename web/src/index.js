@@ -3,7 +3,7 @@ import ReactDOM, { createRoot } from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { App } from "./App";
 import { Home } from "./components/Home";
-import { Brekfast } from "./components/Brekfast";
+import { Breakfast } from "./components/Breakfast";
 import { Brunch } from "./components/Brunch";
 import { Lunch } from "./components/Lunch";
 import { Dinner } from "./components/Dinner";
@@ -17,7 +17,7 @@ root.render(
     <Routes>
       <Route path="/" element={<App />}>
         <Route path="/Home" element={<Home />} />
-        <Route path="/brekfast" element={<Brekfast />} />
+        <Route path="/breakfast" element={<Breakfast />} />
         <Route path="/brunch" element={<Brunch />} />
         <Route path="/lunch" element={<Lunch />} />
         <Route path="/dinner" element={<Dinner />} />
