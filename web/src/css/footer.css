@@ -1,7 +1,51 @@
-#footer{
-    height: 200px;
-    background-color: grey;
+@import url(https://fonts.google.com/specimen/Roboto#standard-styles);
+*{
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+}
+#fotermenu li a {
+    text-decoration: none;
+    color: #FFFFFF;
+    font-family: 'Roboto', sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;    
+    font-size: 12px;
+    letter-spacing: 21;
 }
 #footer{
-margin-top:500px;
+
+    height: 200px;
+    background-color: #626262;
+    margin-top: 100%;
+}
+#footer{
+    padding: 50px 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#fotermenu {
+    display: flex;
+    justify-content: space-between;
+}
+#fotermenu li{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px;
+}
+#fotermenu .discs{
+    color: #FFFFFF;
+    font-size: 25px;
+}
+#footertext{
+    flex-wrap: wrap;
+    width: 150px;
+}
+#footertext p {
+    color: #FFFFFF;
+    font-family:'Roboto', sans-serif ;
+    font-size: 15px;
+    font-weight: 100;
 }

@@ -39,9 +39,14 @@ export function CreateAcc() {
             <div class="CreateAcc">
                 <h1>Create Account</h1>
             </div>
+            <div>
+                <h1>Type none</h1>
+            </div>
             <div class="Lorem">
-                <h1>Create your</h1>
-                <h1>account</h1>
+                <div id="title">
+                    <h1 id="orangetitle">Create your</h1>
+                    <h1 id="greytitle">account</h1>
+                </div>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis lectus ac risus consectetur blandit non et ante. Vestibulum ut ornare est. In feugiat eu lectus id rutrum. Sed quis magna orci.
                     Pellentesque mollis velit vel euismod pharetra. Etiam pretium nunc eget ipsum vulputate mattis. Aliquam luctus at dolor non cursus.
@@ -78,7 +83,7 @@ export function CreateAcc() {
                     <button type="submit">Create Account</button>
                 </form>
             </div>
-        </div>
+        </div >
 
 
 

@@ -8,7 +8,7 @@ body{
 
     background-color: #F8F7F2;
 }
-a {
+#nav a {
     text-decoration: none;
     color: #A5A5A5;
     font-family: 'Roboto', sans-serif;

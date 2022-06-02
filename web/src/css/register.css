@@ -1,3 +1,5 @@
+@import url(https://fonts.google.com/specimen/Roboto#standard-styles);
+
 *{
   box-sizing: border-box;
    padding: 0px;
@@ -6,7 +8,7 @@
 }
 .container {  
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
   gap: 0px 0px;
   grid-auto-flow: row;
@@ -16,8 +18,37 @@
     ". . .";
 }
 
-.CreateAcc { grid-area: CreateAcc; }
+.CreateAcc { grid-area: CreateAcc;
+ 
+  /* display: flex;
+  flex-wrap: wrap;
+  justify-content:baseline */
+}
 
-.Lorem { grid-area: Lorem; }
+.Lorem { 
+  grid-area: Lorem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center
+}
+#title h1 {
+  width: 350px;
+  font-size: 50px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 750;
 
-.Form { grid-area: Form; }
+
+}
+#orangetitle {
+  color: #F0972A;
+}
+#greytitle{
+  color: #626262;
+}
+
+.Form { 
+  grid-area: Form;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+ }
