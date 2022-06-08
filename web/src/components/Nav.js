@@ -9,16 +9,16 @@ export const Nav = () => {
             <li ><Link to="/Home"><img src={BabysLogo} /></Link></li>
             <div id="menu">
                 <li ><Link to="/breakfast">Breakfast</Link></li>
-                <li class="bullets">•</li>
+                <li className="bullets">•</li>
                 <li><Link to="/brunch">Brunch</Link></li>
-                <li class="bullets">•</li>
+                <li className="bullets">•</li>
                 <li><Link to="/lunch">Lunch</Link></li>
-                <li class="bullets">•</li>
+                <li className="bullets">•</li>
                 <li ><Link to="/dinner">Dinner</Link></li>
             </div>
             <div id="accarea">
                 <li id="login"><Link to="/login">Log In</Link></li>
-                <li class="or">or</li>
+                <li className="or">or</li>
                 <li id="register"><Link to="/register">Create Account</Link></li>
             </div>
         </ul >

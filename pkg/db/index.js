@@ -10,11 +10,11 @@ let DSN = `mongodb+srv://${username}:${password}@${host}/${dbname}?retryWrites=t
 
 mongoose.connect(
     DSN,
-    { useNewUrlParser: true, useUnifiedTopology: true },
+    // {useNewUrlParser: true, useUnifiedTopology: true},
     err => {
         if (err) {
-            return console.log('Could not connect to DB', err);
+            return console.log('Could not connect to DB:', err);
         }
-        console.log('Succsessfully connect to DB!');
+        console.log('Successfully conneted to DB');
     }
 );

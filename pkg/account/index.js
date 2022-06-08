@@ -1,15 +1,13 @@
 const mongoose = require('mongoose');
 
-const account = mongoose.model(
-    'accounts',
-    {
-        first_name: String,
-        last_name: String,
-        email: String,
-        password: String,
-        repeat_password: String,
-        birthday: Date
-    },
+const Account = mongoose.model(
+    'accounts', {
+    first_name: String,
+    last_name: String,
+    password: String,
+    email: String,
+    birthday: Date
+},
     'accounts'
 );
 const create = async (acc) => {
