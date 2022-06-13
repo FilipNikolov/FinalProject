@@ -8,28 +8,37 @@ const app = express();
 app.use(
     '/api/v1/auth',
     proxy(
-        'http://localhost:10001',
-        { proxyReqPathResolve: (req) => `http://localhost:10001/api/v1/auth/${req.url}` }
+        'http://127.0.0.1:10001',
+        { proxyReqPathResolver: (req) => `http://127.0.0.1:10001/api/v1/auth${req.url}` }
     )
 );
 app.use(
-    '',
+    '/api/v1/blog',
     proxy(
-        'http://localhost:10002',
-        { proxyReqPathResolve: (req) => `http://localhost:10001////${req.url}` }
+        'http://127.0.0.1:10002',
+        { proxyReqPathResolve: (req) => `http://127.0.0.1:10001/api/v1/blog${req.url}` }
     )
 );
+// app.use(
+//     '',
+//     proxy(
+//         'http://localhost:10003',
+//         { proxyReqPathResolve: (req) => `http://localhost:10001////${req.url}` }
+//     )
+// );
+
 app.use(
-    '',
+    '/',
     proxy(
-        'http://localhost:10003',
-        { proxyReqPathResolve: (req) => `http://localhost:10001////${req.url}` }
+        'http://127.0.0.1:3000',
+        { proxyReqPathResolver: (req) => `http://127.0.0.1:3000${req.url}` }
     )
 );
 
-app.use('/', express.static(path.join(__dirname, '/../../web/build')));
-
+// app.use('/', express.static(path.join(__dirname, '/../../web/build')));
 const PORT = process.env.PORT || config.get('services').proxy.port;
+
+console.log('Proxy starting port', PORT);
 
 app.listen(PORT, err => {
     if (err) {

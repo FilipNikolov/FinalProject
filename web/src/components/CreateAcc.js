@@ -4,11 +4,11 @@ import "../css/register.css";
 export function CreateAcc() {
 
     const RegDataInit = {
-        firstname: "",
-        lastname: "",
-        email: "",
-        password: "",
-        birthday: ""
+        firstname: String,
+        lastname: String,
+        email: String,
+        password: String,
+        birthday: Date,
 
     };
     const [regData, setRegData] = useState(RegDataInit);
@@ -30,10 +30,10 @@ export function CreateAcc() {
 
             });
             if (!res.ok) {
-                throw 'Error loggin in !'
-            };
-
-
+                throw 'Cannot create account!'
+            }
+            let data = await res.json();
+            localStorage.setItem(data);
         } catch (err) {
             alert(err)
         }
