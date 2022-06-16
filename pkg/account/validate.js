@@ -1,8 +1,8 @@
 const { Validator } = require('node-input-validator');
 
 const Account = {
-    first_name: 'required|string',
-    last_name: 'required|string',
+    firstname: 'required|string',
+    lastname: 'required|string',
     password: 'required|string',
     email: 'required|string',
     birthday: 'required|date',

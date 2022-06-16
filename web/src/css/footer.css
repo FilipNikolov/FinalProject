@@ -1,9 +1,9 @@
 @import url(https://fonts.google.com/specimen/Roboto#standard-styles);
-*{
+/* *{
     box-sizing: border-box;
     padding: 0px;
     margin: 0px;
-}
+} */
 #fotermenu li a {
     text-decoration: none;
     color: #FFFFFF;

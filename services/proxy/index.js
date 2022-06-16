@@ -30,8 +30,8 @@ app.use(
 app.use(
     '/',
     proxy(
-        'http://127.0.0.1:3000',
-        { proxyReqPathResolver: (req) => `http://127.0.0.1:3000${req.url}` }
+        'http://127.0.0.1:10001',
+        { proxyReqPathResolver: (req) => `http://127.0.0.1:10001${req.url}` }
     )
 );
 

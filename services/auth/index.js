@@ -7,6 +7,11 @@ const auth = require('./handlers/auth');
 
 const api = express();
 
+const cors = require('cors');
+api.use(cors({
+    origin: ['http://localhost:3000']
+}));
+
 api.use(express.json());
 api.use(jwt({
     secret: config.get('security').jwt_key,
@@ -21,6 +26,9 @@ api.use(jwt({
 api.post('/api/v1/auth/login', auth.login);
 api.post('/api/v1/auth/register', auth.register);
 api.get('/api/v1/auth/refresh-token', auth.refreshToken);
+
+
+
 
 api.use(function (err, req, res, next) {
     if (err.name === 'UnauthorizedError') {

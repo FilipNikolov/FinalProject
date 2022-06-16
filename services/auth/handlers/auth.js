@@ -25,7 +25,7 @@ const login = async (req, res) => {
             };
         }
         let payload = {
-            first_name: acc.first_name,
+            firstname: acc.firstname,
             email: acc.email,
             id: acc._id,
             exp: new Date().getTime() / 1000 + 7 * 24 * 60 * 60

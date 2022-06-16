@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 
 const Account = mongoose.model(
     'accounts', {
-    first_name: String,
-    last_name: String,
+    firstname: String,
+    lastname: String,
     password: String,
     email: String,
     birthday: Date

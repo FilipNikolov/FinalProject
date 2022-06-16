@@ -1,27 +1,19 @@
 @import url(https://fonts.google.com/specimen/Roboto#standard-styles);
-
-/* *{
-  box-sizing: border-box;
-   padding: 0px;
-   margin: 0px;
- 
-} */
-#registerpage {  
-  width: 100%; 
+#loginpage{
+    width: 100%; 
     margin: 0;
     padding: 0px;
     display: flex;
     justify-content: center;
-}
 
-#register-area{
+}
+#login-area{
   width: 80%;
   display: flex;
   justify-content: center;
   flex-direction: column;
 }
-
-#register-line{
+#login-line{
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -30,7 +22,7 @@
   align-items: baseline;
 }
 
-#register-line #title {
+#login-line #title {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
@@ -40,38 +32,21 @@
   letter-spacing:-1px;
   
 }
-#regline{
+#loginline{
   background-color: #D8D8D8;
   height: 1.5px;
-  width: 81%;
+  width: 92%;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
 }
-.Lorem { 
-  grid-area: Lorem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center
-}
-#title h1 {
-  width: 350px;
-  font-size: 50px;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 750;
 
+#text-area .welcome {
+    display: inline-block;
+  }
 
+#login-form{ 
+   justify-content: right;
+    width: 200px;
+   
 }
-#orangetitle {
-  color: #F0972A;
-}
-#greytitle{
-  color: #626262;
-}
-
-.Form { 
-  grid-area: Form;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
- }

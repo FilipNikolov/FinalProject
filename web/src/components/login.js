@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "../css/login.css";
 
 export const Login = () => {
 
@@ -8,16 +9,16 @@ export const Login = () => {
     }
 
     const [formData, setFormData] = useState(formDataInit);
-    const [loggedIn, setLoggedIn] = useState(false);
+    const [loggedin, setLoggedin] = useState(false);
 
     const token = localStorage.getItem('jwt');
 
     useEffect(() => {
         if (token === null) {
-            setLoggedIn(false)
+            setLoggedin(false)
         }
-        if (token) {
-            setLoggedIn(true)
+        else if (token) {
+            setLoggedin(true)
         }
         console.log(token)
     }, [])
@@ -26,7 +27,7 @@ export const Login = () => {
         e.preventDefault();
         console.log(formData);
         try {
-            let res = await fetch('/api/v1/auth/login', {
+            let res = await fetch('http://localhost:10001/api/v1/auth/login', {
                 method: 'POST',
                 body: JSON.stringify(formData),
                 headers: {
@@ -34,12 +35,12 @@ export const Login = () => {
                 }
             });
             if (!res.ok) {
-                throw 'Error Logging in';
+                throw 'Cannot login!';
             }
             let data = await res.json();
             localStorage.setItem('jwt', data.token);
             if (data.token) {
-                setLoggedIn(true)
+                setLoggedin(true)
             }
         } catch (err) {
             alert(err);
@@ -49,7 +50,7 @@ export const Login = () => {
 
     const removeToken = () => {
         localStorage.setItem('jwt', null)
-        setLoggedIn(false)
+        setLoggedin(false)
 
     }
 
@@ -61,30 +62,46 @@ export const Login = () => {
     }
 
     return (
-        <div>
-
-            {loggedIn === false ?
-                <form onSubmit={submit}>
-                    <label>
-                        <span>Username (email)</span>
-                        <input type="email" name="email" value={formData.email} onChange={inputChange} />
-                    </label>
-                    <br />
-                    <label>
-                        <span>Password</span>
-                        <input type="password" name="password" value={formData.password} onChange={inputChange} />
-                    </label>
-                    <br />
-                    <button type="submit" >Log in</button>
-
-                </form>
-
-                :
-                <div>
-                    <h1>Logged in</h1>
-                    <button onClick={removeToken}>Log Out</button>
+        <div id="loginpage">
+            <div id="login-area">
+                <div id="login-line">
+                    <h1 id="title">Log In</h1>
+                    <div id="loginline"></div>
                 </div>
-            }
+                <div id="text-area">
+                    <h1 className="welcome">Welcome to </h1>
+                    <h1 className="welcome"> Baby's</h1>
+                    <div id="text-left">
+                        <span>
+                            Lorem Ipsum is simply dummy text of the printing and typesetting
+                            industry. Lorem Ipsum has been the industry's standard dummy text ever since
+                            the 1500s, when an unknown printer took a galley of type and scrambled it to make a
+                            type specimen book. It has survived not
+                            only five centuries, but also the leap into electronic typesetting,
+                            remaining essentially unchanged. It was popularised in the 1960s with the release of
+                            Letraset sheets containing Lorem Ipsum passages
+                        </span>
+                    </div>
+                </div>
+                {loggedin === false ?
+                    <form onSubmit={submit} id="login-form">
+                        <label className="login-area">
+                            <span>Username</span>
+                            <input type="email" name="email" value={formData.email} onChange={inputChange} />
+                        </label>
+                        <label className="login-area">
+                            <span>Password</span>
+                            <input type="password" name="password" value={formData.password} onChange={inputChange} />
+                        </label>
+                        <button type="submit" className="login-btn">Log in</button>
+                    </form>
+                    :
+                    <div>
+                        <h1 className="login-text">Logged in</h1>
+                        <button onClick={removeToken} className="login-btn">Log Out</button>
+                    </div>
+                }
+            </div>
         </div>
     )
 }
