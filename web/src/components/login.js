@@ -15,15 +15,7 @@ export const Login = () => {
     const navigator = useNavigate();
     const token = localStorage.getItem('jwt');
 
-    useEffect(() => {
-        if (token === null) {
-            setLoggedin(false)
-        }
-        else if (token) {
-            setLoggedin(true)
-            console.log(token)
-        }
-    }, [])
+
 
     const submit = async (e) => {
         e.preventDefault();
@@ -72,39 +64,48 @@ export const Login = () => {
                         <h1 id="title">Log In</h1>
                         <div id="loginline"></div>
                     </div>
-                    <div id="text-area">
-                        <h1 className="welcome">Welcome to </h1>
-                        <h1 className="welcome"> Baby's</h1>
-                        <div id="text-left">
-                            <span>
-                                Lorem Ipsum is simply dummy text of the printing and typesetting
-                                industry. Lorem Ipsum has been the industry's standard dummy text ever since
-                                the 1500s, when an unknown printer took a galley of type and scrambled it to make a
-                                type specimen book. It has survived not
-                                only five centuries, but also the leap into electronic typesetting,
-                                remaining essentially unchanged. It was popularised in the 1960s with the release of
-                                Letraset sheets containing Lorem Ipsum passages
-                            </span>
+                    <div id="loginsmain">
+                        <div id="loginswelcome">
+                            <div id="text-area">
+                                <div id="wlctitle">
+                                    <h1 className="welcome">Welcome</h1>
+                                    <h1 className="welcome"> to</h1>
+                                    <h1 className="babys">Baby's</h1>
+                                </div>
+                                <div id="text-left">
+                                    <span>
+                                        Lorem Ipsum is simply dummy text of the
+                                        printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                                        when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not
+                                        only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised
+                                        in the 1960s with
+                                        the release of Letraset sheets containing Lorem Ipsum
+                                        passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="loginblock">
+                            {loggedin === false ?
+                                <form onSubmit={submit} id="login-form">
+                                    <span class="inputtxt">Email</span>
+                                    <label className="login-area">
+                                        <input type="email" name="email" value={formData.email} onChange={inputChange} placeholder="user@domain.com" />
+                                    </label>
+                                    <span class="inputtxt">Password</span>
+                                    <label className="login-area">
+                                        <input type="password" name="password" value={formData.password} onChange={inputChange} placeholder="******" />
+                                    </label>
+                                    <button type="submit" className="login-btn">LOG IN</button>
+                                </form>
+                                :
+                                <div>
+                                    <h1 className="login-text">Logged in</h1>
+                                    <button onClick={removeToken} className="login-btn">Log Out</button>
+                                </div>
+                            }
                         </div>
                     </div>
-                    {loggedin === false ?
-                        <form onSubmit={submit} id="login-form">
-                            <label className="login-area">
-                                <span>Username</span>
-                                <input type="email" name="email" value={formData.email} onChange={inputChange} />
-                            </label>
-                            <label className="login-area">
-                                <span>Password</span>
-                                <input type="password" name="password" value={formData.password} onChange={inputChange} />
-                            </label>
-                            <button type="submit" className="login-btn">Log in</button>
-                        </form>
-                        :
-                        <div>
-                            <h1 className="login-text">Logged in</h1>
-                            <button onClick={removeToken} className="login-btn">Log Out</button>
-                        </div>
-                    }
                 </div>
             </div>
         </>
