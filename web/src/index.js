@@ -9,6 +9,8 @@ import { Lunch } from "./components/Lunch";
 import { Dinner } from "./components/Dinner";
 import { Login } from "./components/Login";
 import { CreateAcc } from "./components/CreateAcc";
+import { Profile } from "./components/Profile";
+import { Recipes } from "./components/Recipes";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -16,13 +18,15 @@ root.render(
   <Router>
     <Routes>
       <Route path="/" element={<App />}>
-        <Route path="/Home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/breakfast" element={<Breakfast />} />
         <Route path="/brunch" element={<Brunch />} />
         <Route path="/lunch" element={<Lunch />} />
         <Route path="/dinner" element={<Dinner />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<CreateAcc />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/recipes" element={<Recipes />} />
       </Route>
     </Routes>
   </Router>

@@ -1,0 +1,80 @@
+@import url(https://fonts.google.com/specimen/Roboto#standard-styles);
+*{
+   box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+  
+
+}
+body{
+
+    background-color: #F8F7F2;
+}
+#nav a {
+    text-decoration: none;
+    color: #A5A5A5;
+    font-family: 'Roboto', sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;    
+    font-size: 16px;
+    letter-spacing: 21;
+}
+#nav{
+    width: 100%;
+    padding: 50px 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#nav #menu {
+    display: flex;
+    justify-content: space-evenly;
+}
+#nav #menu li{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px;
+}
+#nav #profile-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    
+}
+#profile-info li {
+    padding: 10px;
+}
+#nav #profile a {
+    color:#F0972A;
+    font-size: 18px;
+    border-bottom: 2px solid #A5A5A5;
+   
+}
+
+#nav #recipes a {
+    color:#96BB36;
+    font-size: 18px;
+    border-bottom: 2px solid #A5A5A5;
+ 
+    
+}
+#nav #logout a {
+    color:#B5B5B4;
+    font-size: 18px;
+    border-bottom: 2px solid #A5A5A5;
+    
+}
+#nav #register a{
+    color: white;
+}
+
+#nav .bullets{
+    color: #F0972A;
+    font-size: 35px;
+}
+.profilebullets{
+    color: #626262;
+    font-size: 35px;
+}
+
