@@ -59,49 +59,59 @@ export const CreateAcc = () => {
                         <div id="regline"></div>
                     </div>
 
-                    <div className="Lorem">
-                        <div id="title">
-                            <h1 id="orangetitle">Create your</h1>
-                            <h1 id="greytitle">account</h1>
-                        </div>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis lectus ac risus consectetur blandit non et ante. Vestibulum ut ornare est. In feugiat eu lectus id rutrum. Sed quis magna orci.
-                            Pellentesque mollis velit vel euismod pharetra. Etiam pretium nunc eget ipsum vulputate mattis. Aliquam luctus at dolor non cursus.
-                        </p>
-                    </div>
-                    <div className="Form">
-                        <form onSubmit={submit} className="mainform">
-                            <div>
-                                <div>
-                                    <div className="form">
-                                        <span>First Name</span>
-                                        <input type="text" name="firstname" value={regData.firstname} onChange={inputChange}></input>
-                                    </div>
-                                    <div className="form">
-                                        <span>Last Name</span>
-                                        <input type="text" name="lastname" value={regData.lastname} onChange={inputChange}></input>
-                                    </div>
-                                    <div className="form">
-                                        <span>Email</span>
-                                        <input type="email" name="email" value={regData.email} onChange={inputChange}></input>
-                                    </div>
+                    <div id="registersmain">
+                        <div id="registerswelcome">
+                            <div id="text-area">
+                                <div id="createtitle">
+                                    <h1 className="create-text">Create your</h1>
+                                    <h1 className="acc-text">account</h1>
                                 </div>
-                                <div>
-                                    <div className="form">
-                                        <span>Birthday</span>
-                                        <input type="date" name="birthday" value={Moment(new Date(regData.birthday)).format("yyyy-MM-DD")} onChange={inputChange}></input>
-                                    </div>
-                                    <div className="form">
-                                        <span>Password</span>
-                                        <input type="password" name="password" value={regData.password} onChange={inputChange}></input>
-                                    </div>
-                                    <button type="submit">Create Account</button>
+                                <div id="registertext">
+                                    <span>
+                                        Lorem Ipsum is simply dummy text of the
+                                        printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                                        when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not
+                                        only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised
+                                        in the 1960s with
+                                        the release of Letraset sheets containing Lorem Ipsum
+                                        passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                                    </span>
                                 </div>
                             </div>
-                        </form>
+                        </div>
+
+                        <div id="registersblock">
+                            <form onSubmit={submit} className="register-form">
+                                <div id="createacc-area">
+                                    <div id="leftside">
+                                        <span class="inputtxt">First Name</span>
+                                        <input type="text" name="firstname" value={regData.firstname} onChange={inputChange} placeholder="First Name"></input>
+
+                                        <span class="inputtxt">Email</span>
+                                        <input type="email" name="email" value={regData.email} onChange={inputChange} placeholder="Email"></input>
+
+
+                                        <span class="inputtxt">Password</span>
+                                        <input type="password" name="password" value={regData.password} onChange={inputChange} placeholder="Password"></input>
+                                        <button type="submit" id="acc-btn">CREATE ACCOUNT</button>
+                                    </div>
+                                    <div id="rightside">
+                                        <span class="inputtxt">Last Name</span>
+                                        <input type="text" name="lastname" value={regData.lastname} onChange={inputChange} placeholder="Last Name"></input>
+                                        <span class="inputtxt">Birthday</span>
+                                        <input type="date" name="birthday" id="date" value={Moment(new Date(regData.birthday)).format("yyyy-MM-DD")} onChange={inputChange} placeholder="00-00-0000"></input>
+                                        <span class="inputtxt">Repeat Password</span>
+                                        <input type="password" placeholder="Repeat Password"></input>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
+
+
         </>
 
 

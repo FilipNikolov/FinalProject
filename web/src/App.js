@@ -10,6 +10,7 @@ export function App() {
       <Outlet />
       <Footer />
     </div>
+
   )
 }
 

@@ -11,6 +11,40 @@ export function Profile() {
                         <h1 id="title"> My Profile</h1>
                         <div id="profileline"></div>
                     </div>
+
+
+                    <div id="profilesmain">
+
+                        <form className="profile-form">
+                            <div id="chooseavatar">
+                                <input type="file" placeholder="CHANGE AVATAR" />
+                            </div>
+                            <div id="changing-area">
+                                <div id="profileleftside">
+                                    <span class="inputtext">First Name</span>
+                                    <input type="text" name="firstname" placeholder="First Name"></input>
+
+                                    <span class="inputtext">Email</span>
+                                    <input type="email" name="email" placeholder="Email"></input>
+
+
+                                    <span class="inputtext">Password</span>
+                                    <input type="password" name="password" placeholder="Password"></input>
+                                    <button type="submit" id="save-btn">SAVE</button>
+                                </div>
+                                <div id="profilerightside">
+                                    <span class="inputtext">Last Name</span>
+                                    <input type="text" name="lastname" placeholder="Last Name"></input>
+                                    <span class="inputtext">Birthday</span>
+                                    <input type="date" name="birthday" id="date" />
+                                    <span class="inputtext">Repeat Password</span>
+                                    <input type="password" placeholder="Repeat Password"></input>
+
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
                 </div>
             </div>
 

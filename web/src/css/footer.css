@@ -4,6 +4,18 @@
     padding: 0px;
     margin: 0px;
 } */
+
+#footer{
+    width: 100%;
+    height: 200px;
+    background-color: #626262;
+    position: sticky;
+    bottom: 0;
+    padding: 50px 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+} 
 #fotermenu li a {
     text-decoration: none;
     color: #FFFFFF;
@@ -13,18 +25,7 @@
     font-size: 12px;
     letter-spacing: 21;
 }
-#footer{
 
-    height: 200px;
-    background-color: #626262;
-    margin-top: 100%;
-}
-#footer{
-    padding: 50px 200px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
 #fotermenu {
     display: flex;
     justify-content: space-between;
