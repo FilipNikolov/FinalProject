@@ -11,7 +11,7 @@ import { Login } from "./components/Login";
 import { CreateAcc } from "./components/CreateAcc";
 import { Profile } from "./components/Profile";
 import { Recipes } from "./components/Recipes";
-
+import { CreateEditRecipes } from "./components/CreateEditRecipes";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
@@ -27,6 +27,7 @@ root.render(
         <Route path="/register" element={<CreateAcc />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/recipes" element={<Recipes />} />
+        <Route path="/createrecipes" element={<CreateEditRecipes />} />
       </Route>
     </Routes>
   </Router>

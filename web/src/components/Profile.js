@@ -17,7 +17,8 @@ export function Profile() {
 
                         <form className="profile-form">
                             <div id="chooseavatar">
-                                <input type="file" placeholder="CHANGE AVATAR" />
+                                <img src="https://www.pngitem.com/pimgs/m/22-220721_circled-user-male-type-user-colorful-icon-png.png" alt="/" width="200px" />
+                                <button type="button" id="avatar-btn">CHANGE AVATAR</button>
                             </div>
                             <div id="changing-area">
                                 <div id="profileleftside">

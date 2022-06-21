@@ -1,12 +1,21 @@
 const { Validator } = require('node-input-validator');
 
-const Posts = {
+const Recipes = {
     title: "required|string",
+    type: "required|string",
     description: "required|string",
     time_to_prepare: "required|integer",
     grade: "required|integer",
-    number_of_portion: "required|string"
+    number_of_portion: "required|integer",
+    recipe: "required|string"
 };
+
+const PartialRecipe = {
+    type: "string",
+    title: "string",
+    description: "string",
+    number_of_portion: "integer",
+}
 
 
 const validate = async (data, schema) => {
@@ -21,6 +30,7 @@ const validate = async (data, schema) => {
 };
 
 module.exports = {
-    Posts,
+    Recipes,
+    PartialRecipe,
     validate
 };

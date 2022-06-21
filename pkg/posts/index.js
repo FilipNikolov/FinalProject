@@ -2,11 +2,16 @@ const mongoose = require('mongoose');
 
 const Posts = mongoose.model(
     'posts', {
+    user_id: String,
     title: String,
+    type: String,
     description: String,
     time_to_prepare: Number,
     grade: Number,
-    number_of_portion: String
+    number_of_portion: Number,
+    description: String,
+    recipe: String,
+    created_on: Date
 },
     'posts'
 );
