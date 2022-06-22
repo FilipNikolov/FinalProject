@@ -15,6 +15,6 @@ mongoose.connect(
         if (err) {
             return console.log('Could not connect to DB:', err);
         }
-        console.log('Successfully conneted to DB');
+        console.log('Successfully connected to DB');
     }
 );

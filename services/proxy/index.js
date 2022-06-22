@@ -12,13 +12,13 @@ app.use(
         { proxyReqPathResolver: (req) => `http://127.0.0.1:10001/api/v1/auth${req.url}` }
     )
 );
-app.use(
-    '/api/v1/blog',
-    proxy(
-        'http://127.0.0.1:10002',
-        { proxyReqPathResolve: (req) => `http://127.0.0.1:10001/api/v1/blog${req.url}` }
-    )
-);
+// app.use(
+//     '/api/v1/blog',
+//     proxy(
+//         'http://127.0.0.1:10002',
+//         { proxyReqPathResolve: (req) => `http://127.0.0.1:10001/api/v1/blog${req.url}` }
+//     )
+// );
 // app.use(
 //     '',
 //     proxy(

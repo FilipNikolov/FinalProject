@@ -3,9 +3,14 @@ require('../../pkg/db');
 
 const express = require('express');
 const jwt = require('express-jwt');
-const post = require('./handlers/posts');
+const recipe = require('./handlers/recipe');
 
 const api = express();
+
+const cors = require('cors');
+api.use(cors({
+    origin: ["*"]
+}));
 
 api.use(express.json());
 api.use(jwt({
@@ -13,12 +18,12 @@ api.use(jwt({
     algorithms: ['HS256']
 }));
 
-api.get('/api/v1/blog', post.getAll);
-api.get('/api/v1/blog/:id', post.getSingle);
-api.post('/api/v1/blog', post.create);
-api.put('/api/v1/blog/:id', post.update);
-api.patch('/api/v1/blog/:id', post.updatePartial);
-api.delete('/api/v1/blog/:id', post.remove);
+api.get('/api/v1/recipes', recipe.getAll);
+api.get('/api/v1/recipes/:id', recipe.getSingle);
+api.post('/api/v1/recipes', recipe.create);
+api.put('/api/v1/recipes/:id', recipe.update);
+api.patch('/api/v1/recipes/:id', recipe.updatePartial);
+api.delete('/api/v1/recipes/:id', recipe.remove);
 
 api.use(function (err, req, res, next) {
     if (err.name === 'UnauthorizedError') {
@@ -26,7 +31,7 @@ api.use(function (err, req, res, next) {
     }
 });
 
-api.listen(config.get('services').port, err => {
+api.listen(config.get('services').blog.port, err => {
     if (err) return console.log(err);
     console.log(`Server started on port ${config.get('services').blog.port}`);
 });
