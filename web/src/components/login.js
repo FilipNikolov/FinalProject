@@ -55,6 +55,40 @@ export const Login = () => {
             [e.target.name]: e.target.value
         })
     }
+    // const formDataInit = {
+    //     email: String,
+    //     password: String
+    // };
+
+    // const [formData, setFormData] = useState(formDataInit);
+
+    // const submit = async (e) => {
+    //     e.preventDefault();
+    //     console.log(formData);
+    //     try {
+    //         let res = await fetch('http://localhost:10001/api/v1/auth/login', {
+    //             method: 'POST',
+    //             body: JSON.stringify(formData),
+    //             headers: {
+    //                 'content-type': 'application/json'
+    //             }
+    //         });
+    //         if (!res.ok) {
+    //             throw 'Error logging in';
+    //         }
+    //         let data = await res.json();
+    //         localStorage.setItem('jwt', data.token);
+    //     } catch (err) {
+    //         alert(err);
+    //     }
+    // };
+
+    // const inputChange = (e) => {
+    //     setFormData({
+    //         ...formData,
+    //         [e.target.name]: e.target.value
+    //     });
+    // };
 
     return (
         <><Nav />

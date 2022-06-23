@@ -6,7 +6,7 @@ export const Blogposts = () => {
 
     const getPosts = async () => {
         try {
-            let res = await fetch('/api/v1/blog', {
+            let res = await fetch('http://localhost:10002/api/v1/recipes', {
                 method: 'GET',
                 headers: {
                     'content-type': 'application/json',

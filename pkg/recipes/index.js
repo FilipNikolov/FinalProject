@@ -16,23 +16,23 @@ const Recipe = mongoose.model(
 );
 const getAll = async (user_id) => {
     return await Recipe.find({ user_id });
-};
 
+};
 const getSingle = async (user_id, id) => {
-    return await Recipe.findOne({ user_id, id });
+    return await Recipe.findOne({ user_id, _id: id });
 };
 
-const create = async (recipes) => {
-    let p = new Recipe(recipes);
-    return await p.save();
+const create = async (data) => {
+    let r = new Recipe(data);
+    return await r.save();
 };
 
 const update = async (id, data) => {
-    return Recipe.updateOne({ id }, data);
+    return Recipe.updateOne({ _id: id }, data);
 };
 
 const remove = async (id) => {
-    return await Recipe.deleteOne({ id });
+    return await Recipe.deleteOne({ _id: id });
 };
 
 module.exports = {

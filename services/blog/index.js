@@ -9,7 +9,7 @@ const api = express();
 
 const cors = require('cors');
 api.use(cors({
-    origin: ["*"]
+    origin: ['http://localhost:3000']
 }));
 
 api.use(express.json());
