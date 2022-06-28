@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const Recipe = mongoose.model(
     'recipes', {
     user_id: String,
+    // image: String,
     title: String,
     type: String,
     description: String,

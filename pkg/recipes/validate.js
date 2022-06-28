@@ -1,24 +1,19 @@
 const { Validator } = require('node-input-validator');
 
 const Recipe = {
+    // image: 'required|string',
     title: 'required|string',
     type: 'required|string',
     description: 'required|string',
     timetoprepare: 'required|string',
-    grade: 'required|integer',
     numberofportion: 'required|integer',
     recipe: 'required|string',
-    createdon: 'required|date'
+
 };
 
 const PartialRecipe = {
     title: 'string',
-    type: 'string',
     description: 'string',
-    timetoprepare: 'string',
-    grade: 'integer',
-    numberofportion: 'integer',
-    recipe: 'string',
     createdon: 'date'
 };
 

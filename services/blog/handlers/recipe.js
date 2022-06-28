@@ -5,6 +5,8 @@ const {
     validate
 } = require("../../../pkg/recipes/validate");
 
+const dt = new Date();
+
 const getAll = async (req, res) => {
     try {
         let ps = await recipes.getAll(req.user.id);
@@ -32,12 +34,15 @@ const getSingle = async (req, res) => {
     }
 };
 
+
 const create = async (req, res) => {
     try {
         await validate(req.body, Recipe);
         let data = {
             ...req.body,
-            user_id: req.user.id
+            user_id: req.user.id,
+            createdon: `${dt.getMonth() + 1}.${dt.getDate()}.${dt.getFullYear()}`,
+            grade: Math.random() * (50 - 4 + 1) + 6,
         };
         let ps = await recipes.create(data);
         return res.status(201).send(ps);

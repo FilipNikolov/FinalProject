@@ -7,16 +7,13 @@ import { Link } from "react-router-dom";
 
 export const CreateEditRecipes = () => {
     const RecipeDataInit = {
+        // image: String,
         title: String,
         type: String,
         description: String,
         timetoprepare: String,
-        grade: Number,
         numberofportion: Number,
         recipe: String,
-        createdon: Date
-
-
     };
     const navigator = useNavigate();
     const [RecipeData, setRecipeData] = useState(RecipeDataInit);
@@ -28,22 +25,24 @@ export const CreateEditRecipes = () => {
         });
     };
 
-    const submit = async (e) => {
+    const submit = async () => {
 
         try {
             let res = await fetch('http://localhost:10002/api/v1/recipes', {
                 method: 'POST',
                 body: JSON.stringify(RecipeData),
                 headers: {
-                    'content-type': 'application/json'
+                    'content-type': 'application/json',
+                    'authorization': `bearer ${localStorage.getItem("jwt")}`
                 }
 
             });
+
             if (!res.ok) {
                 throw 'Cannot add recipe'
             }
             res = await res.json();
-            // localStorage.setItem("recipes", res)
+            localStorage.setItem("recipes", res)
             if (res.ok) {
                 navigator('/recipes');
             }
@@ -64,7 +63,7 @@ export const CreateEditRecipes = () => {
                         <div id="create-container">
                             <div id="image-container">
                                 <span>Recipe Image</span>
-                                <div id="img-container"><img src="https://www.simplyrecipes.com/thmb/8caxM88NgxZjz-T2aeRW3xjhzBg=/2000x1125/smart/filters:no_upscale()/__opt__aboutcom__coeus__resources__content_migration__simply_recipes__uploads__2019__09__easy-pepperoni-pizza-lead-3-8f256746d649404baa36a44d271329bc.jpg" alt="/" /></div>
+                                {/* <input type="image" name="image" /> */}
                                 <button type="button" id="uploadbtn">upload image</button>
                             </div>
                             <div id="recipe-info">
@@ -76,10 +75,11 @@ export const CreateEditRecipes = () => {
                                     <div className="containers">
                                         <span>Category</span>
                                         <select value={RecipeData.type} onChange={inputChange} name="type" id="kitchen" form="kitchenform">
-                                            <option name="type" value={RecipeData.type} onChange={inputChange}>Brekfast</option>
-                                            <option name="type" value={RecipeData.type} onChange={inputChange}>Brunch</option>
-                                            <option name="type" value={RecipeData.type} onChange={inputChange}>Lunch</option>
-                                            <option name="type" value={RecipeData.type} onChange={inputChange}>Dinner</option>
+                                            <option value="" disabled selected>Select Category</option>
+                                            <option name="type" value="Breakfast">Breakfast</option>
+                                            <option name="type" value="Brunch" >Brunch</option>
+                                            <option name="type" value="Lunch" >Lunch</option>
+                                            <option name="type" value="Dinner" >Dinner</option>
                                         </select>
                                     </div>
                                     <div className="containers">

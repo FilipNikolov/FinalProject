@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ProfileNav } from "./ProfileNav";
 import "../css/recipes.css";
 import Plus from "../imgs/icon_plus_white.svg";
@@ -8,6 +8,10 @@ import TrashCan from "../imgs/icon_trashcan.svg";
 
 export const Recipes = () => {
     const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+        getPosts()
+    }, [])
 
     const getPosts = async () => {
         try {
@@ -24,32 +28,31 @@ export const Recipes = () => {
             console.log(err);
         }
     };
-    const editPosts = async (_id) => {
-        try {
-            let res = await fetch('http://localhost:10002/api/v1/recipes/:id', {
-                method: 'PATCH',
-                headers: {
-                    'content-type': 'application/json',
-                    'authorization': `bearer ${localStorage.getItem('jwt')}`
-                }
-            });
-            let data = await res.json();
-            setPosts(data);
-        } catch (err) {
-            console.log(err);
-        }
-    }
-    const deleteRecipes = async (id) => {
-        try {
-            const newPosts = await fetch('http://localhost:10002/api/v1/recipes')
-                .then((newPosts) => newPosts.filter((item) => item.id !== id))
 
-        } catch (err) {
-            console.log(err)
-        }
+    const deletePost = async (id) => {
+        let res = await fetch('http://localhost:10002/api/v1/recipes/' + id, {
+            method: 'DELETE',
+            headers: {
+                'content-type': 'application/json',
+                'Accept': 'application/json',
+                'authorization': `bearer ${localStorage.getItem("jwt")}`
+            }
+        })
+        res = await res.json()
+        getPosts()
     }
-    getPosts();
+    const editPost = async (id) => {
+        let res = await fetch('http://localhost:10002/api/v1/recipes/' + id, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json',
+                'Accept': 'application/json',
+                authorization: `bearer ${localStorage.getItem("jwt")}`
+            }
+        })
+        res = await res.json()
 
+    };
     return (
         <>   <ProfileNav />
             <div id="recipespage">
@@ -76,14 +79,14 @@ export const Recipes = () => {
                     <div id="recipe-container">
                         {posts.map(p => {
                             return (
-                                <div id="recipes-box">
-                                    <ul type="none" key={p._id} id="recipe">
-                                        <li id="recipe-title" key={p._id}>{p.title}</li>
-                                        <li id="recipe-category" key={p._id} >{p.type}</li>
-                                        <li id="recipe-date" key={p._id}>{Moment(new Date(p.createdon)).format("DD.MM.yyyy")}</li>
+                                <div id="recipes-box" key={p._id}>
+                                    <ul type="none" id="recipe">
+                                        <li id="recipe-title" >{p.title}</li>
+                                        <li id="recipe-category" >{p.type}</li>
+                                        <li id="recipe-date" >{Moment(new Date(p.createdon)).format("DD.MM.yyyy")}</li>
                                     </ul>
                                     <ul id="delete-container">
-                                        <li id="recipe-delete" onClick={deleteRecipes}><img src={TrashCan} /></li>
+                                        <button type="submit" id="recipe-delete" onClick={() => { deletePost(p._id); window.location.reload() }} ><img src={TrashCan} /></button>
                                     </ul>
                                 </div>
 
