@@ -1,9 +1,10 @@
+
 const makeID = (length) => {
     var result = '';
-    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-    var charactersLenght = characters.length;
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
     for (var i = 0; i < length; i++) {
-        result += characters.charAt(math.floor(Mathh.random() * charactersLenght));
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;
 };

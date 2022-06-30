@@ -5,9 +5,10 @@ import "../css/createrecipes.css";
 import Back from "../imgs/icon_back_white.svg";
 import { Link } from "react-router-dom";
 
+
 export const CreateEditRecipes = () => {
     const RecipeDataInit = {
-        // image: String,
+        photo: String,
         title: String,
         type: String,
         description: String,
@@ -17,6 +18,8 @@ export const CreateEditRecipes = () => {
     };
     const navigator = useNavigate();
     const [RecipeData, setRecipeData] = useState(RecipeDataInit);
+    const [photo, setPhoto] = useState();
+    const [docs, setDocs] = useState();
 
     const inputChange = (e) => {
         setRecipeData({
@@ -25,9 +28,30 @@ export const CreateEditRecipes = () => {
         });
     };
 
-    const submit = async () => {
+    const UploadPhoto = new FormData();
+    UploadPhoto.append("document", docs);
 
+
+    const handleUpload = (e) => {
+        setPhoto(URL.createObjectURL(e.target.files[0]));
+        setDocs(e.target.files[0]);
+        console.log(setDocs)
+    };
+
+
+
+    const submit = async (e) => {
+        e.preventDefault();
         try {
+            let resp = await fetch('http://localhost:10003/api/v1/storage', {
+                method: 'POST',
+                body: UploadPhoto,
+                headers: {
+                    'authorization': `bearer ${localStorage.getItem("jwt")}`
+                }
+
+            });
+
             let res = await fetch('http://localhost:10002/api/v1/recipes', {
                 method: 'POST',
                 body: JSON.stringify(RecipeData),
@@ -38,18 +62,24 @@ export const CreateEditRecipes = () => {
 
             });
 
-            if (!res.ok) {
-                throw 'Cannot add recipe'
+            if (res.ok && resp.ok) {
+                navigator('/recipes');
+            }
+            else if (!res.ok && !resp.ok) {
+                return 'Cannot add recipe!'
             }
             res = await res.json();
             localStorage.setItem("recipes", res)
-            if (res.ok) {
-                navigator('/recipes');
-            }
         } catch (err) {
             alert(err)
         }
+
     };
+
+    // const uploadFiles = () => {
+    //     document.getElementById("uploadinput").click();
+    // };
+
     return (
         <>   <ProfileNav />
             <div id="createepage">
@@ -57,14 +87,15 @@ export const CreateEditRecipes = () => {
                     <div id="create-line">
                         <h1 id="title"> My Recipes</h1>
                         <div id="createline"></div>
-                        <Link to="/recipes"> <img id="back-icon" src={Back} /></Link>
+                        <Link to="/recipes"> <img id="back-icon" src={Back} alt="" /></Link>
                     </div>
                     <form onSubmit={submit} id="recipe-form">
                         <div id="create-container">
                             <div id="image-container">
                                 <span>Recipe Image</span>
-                                {/* <input type="image" name="image" /> */}
-                                <button type="button" id="uploadbtn">upload image</button>
+                                <img id="recipeuploadphoto" src={photo} value={RecipeData.photo} border="0" width="300px" height="150px" />
+                                <label for="uploadbtn" id="btn-container">Upload Image</label>
+                                <input type="file" id="uploadbtn" onChange={handleUpload} />
                             </div>
                             <div id="recipe-info">
                                 <div id="recipetitle">
@@ -111,4 +142,4 @@ export const CreateEditRecipes = () => {
 
         </>
     )
-}
+};

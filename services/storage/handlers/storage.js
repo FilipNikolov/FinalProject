@@ -1,28 +1,32 @@
-const fs = require('fs');
-const strings = require('../../../pkg/strings');
+const fs = require("fs");
+const { makeID } = require("../../../pkg/strings");
 
-const MAX_FILESIZE = 1048576; // 1024 * 1024 = 1mb
-const ALLOWED_FILETYPES = ['image/jpeg', 'image/png', 'image/pjpeg', 'image/gif'];
+const DATA_SIZE = 1048576;
+const DATA_TYPE = ["image/jpeg", "image/png", "image/pjpeg", "image/gif", "image/jpg"];
 
 const upload = async (req, res) => {
-    if (MAX_FILESIZE < req.files.document.size) {
-        return res.status(400).send('File exceeds max file size');
+    if (DATA_SIZE < req.files.document.size) {
+        return res.status(400).send("File upload is too large");
     }
-    if (!ALLOWED_FILETYPES.includes(req.files.document.mimetype)) {
-        return res.status(400).send('Filetype not allowed');
+
+    if (!DATA_TYPE.includes(req.files.document.mimetype)) {
+        return res.status(404).send("File type is not supported");
     }
-    let userDir = `user_${req.user.id}`;
-    let userDirPath = `${__dirname}/../../../uploads/${userDir}`;
+
+    const userDir = `user_${req.user.id}`;
+    const userDirPath = `${__dirname}/../../../uploads/${userDir}`;
+
     if (!fs.existsSync(userDirPath)) {
         fs.mkdirSync(userDirPath);
     }
-    let fileName = `${strings.makeID(6)}_${req.files.document.name}`; // 872hd8_imenafajl.png
-    let filePath = `${userDirPath}/${fileName}`;
-    req.files.document.mv(filePath, err => {
+    const fileName = `${makeID(6)}_${req.files.document.name}`;
+    const filePath = `${userDirPath}/${fileName}`;
+
+    req.files.document.mv(filePath, (err) => {
         if (err) {
-            return res.status(500).send('Internal server error');
+            return res.status(500).send("Internal Server Error");
         }
-        res.status(201).send({ file_name: fileName });
+        return res.status(201).send({ file_name: fileName });
     });
 };
 
@@ -31,12 +35,35 @@ const download = async (req, res) => {
     let userDirPath = `${__dirname}/../../../uploads/${userDir}`;
     let filePath = `${userDirPath}/${req.params.filename}`;
     if (!fs.existsSync(filePath)) {
-        return res.status(404).send('File not foud');
+        return res.status(404).send("File not foud");
     }
     res.download(filePath);
 };
 
+/*const tmpUpload = async (req, res) => {
+    if (MAX_FILESIZE < req.files.document.size) {
+        return res.status(400).send('File exceeds max file size');
+    }
+    if (!ALLOWED_FILETYPES.includes(req.files.document.mimetype)) {
+        return res.status(400).send('Filetype not allowed');
+    }
+    let userTmpDir = `user_${req.user.id}_tmp`;
+    let userTmpDirPath = `${__dirname}/../../../uploads/${userTmpDir}`;
+    if (!fs.existsSync(userTmpDirPath)) {
+        fs.mkdirSync(userTmpDirPath);
+    }
+    let tmpFileName = `tmp_${strings.makeID(6)}_${req.files.document.name}`; // 872hd8_imenafajl.png
+    let tmpFilePath = `${userTmpDirPath}/${tmpFileName}`;
+    req.files.document.mv(tmpFilePath, err => {
+        if (err) {
+            return res.status(500).send('Internal server error');
+        }
+        res.status(201).send({ tmp_file_path: tmpFilePath });
+    }); 
+} */
+
 module.exports = {
     upload,
-    download
+    download,
+    // tmpUpload
 };
