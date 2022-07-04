@@ -1,8 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import { ProfileNav } from "./ProfileNav";
 import "../css/profile.css";
 
 export function Profile() {
+
+
+
+    const [photo, setPhoto] = useState();
+    const [docs, setDocs] = useState();
+
+
+
+    const UploadPhoto = new FormData();
+    UploadPhoto.append("document", docs);
+
+
+    const handleUpload = (e) => {
+        setPhoto(URL.createObjectURL(e.target.files[0]));
+        setDocs(e.target.files[0]);
+        console.log(setDocs)
+    };
+
+    const submit = async (e) => {
+        e.preventDefault();
+        try {
+            let res = await fetch('http://localhost:10003/api/v1/storage', {
+                method: 'POST',
+                body: UploadPhoto,
+                headers: {
+                    'authorization': `bearer ${localStorage.getItem("jwt")}`
+                }
+
+            });
+            if (!res.ok) {
+                return 'Cannot add avatar!'
+            }
+            res = await res.json();
+            localStorage.setItem("avatar", res)
+        } catch (err) {
+            alert(err)
+        }
+
+    };
+
+
     return (
         <>   <ProfileNav />
             <div id="profilepage">
@@ -15,10 +56,11 @@ export function Profile() {
 
                     <div id="profilesmain">
 
-                        <form className="profile-form">
+                        <form className="profile-form" onSubmit={submit}>
                             <div id="chooseavatar">
-                                <img src="https://www.pngitem.com/pimgs/m/22-220721_circled-user-male-type-user-colorful-icon-png.png" alt="/" width="200px" />
-                                <button type="button" id="avatar-btn">CHANGE AVATAR</button>
+                                <img id="recipeuploadphoto" src={photo} value={Profile.photo} border="0" width="300px" height="150px" />
+                                <label for="uploadbtn" id="btn-container">Upload Image</label>
+                                <input type="file" id="uploadbtn" onChange={handleUpload} />
                             </div>
                             <div id="changing-area">
                                 <div id="profileleftside">
@@ -34,9 +76,9 @@ export function Profile() {
                                     <button type="submit" id="save-btn">SAVE</button>
                                 </div>
                                 <div id="profilerightside">
-                                    <span class="inputtext">Last Name</span>
+                                    <span class="inputtext" value={accData.lastname}>Last Name</span>
                                     <input type="text" name="lastname" placeholder="Last Name"></input>
-                                    <span class="inputtext">Birthday</span>
+                                    <span class="inputtext" value={accData.birthday}>Birthday</span>
                                     <input type="date" name="birthday" id="date" />
                                     <span class="inputtext">Repeat Password</span>
                                     <input type="password" placeholder="Repeat Password"></input>

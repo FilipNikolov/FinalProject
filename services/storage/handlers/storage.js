@@ -29,6 +29,31 @@ const upload = async (req, res) => {
         return res.status(201).send({ file_name: fileName });
     });
 };
+const uploadAvatar = async (req, res) => {
+    if (DATA_SIZE < req.files.document.size) {
+        return res.status(400).send("File upload is too large");
+    }
+
+    if (!DATA_TYPE.includes(req.files.document.mimetype)) {
+        return res.status(404).send("File type is not supported");
+    }
+
+    const userDir = `user_${req.user.id}`;
+    const userDirPath = `${__dirname}/../../../uploads/${userDir}`;
+
+    if (!fs.existsSync(userDirPath)) {
+        fs.mkdirSync(userDirPath);
+    }
+    const fileName = `${makeID(6)}_${req.files.document.name}`;
+    const filePath = `${userDirPath}/${fileName}`;
+
+    req.files.document.mv(filePath, (err) => {
+        if (err) {
+            return res.status(500).send("Internal Server Error");
+        }
+        return res.status(201).send({ file_name: fileName });
+    });
+};
 
 const download = async (req, res) => {
     let userDir = `user_${req.user.id}`;
@@ -39,31 +64,20 @@ const download = async (req, res) => {
     }
     res.download(filePath);
 };
+const remove = async (req, res) => {
+    let userDir = `images`;
+    let userDirPath = `${__dirname}/../../../uploads/${userDir}`;
+    let filePath = `${userDirPath}/${req.params.filename}`;
+    if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath)
+        return res.status(204).send('File deleted');
+    }
+};
 
-/*const tmpUpload = async (req, res) => {
-    if (MAX_FILESIZE < req.files.document.size) {
-        return res.status(400).send('File exceeds max file size');
-    }
-    if (!ALLOWED_FILETYPES.includes(req.files.document.mimetype)) {
-        return res.status(400).send('Filetype not allowed');
-    }
-    let userTmpDir = `user_${req.user.id}_tmp`;
-    let userTmpDirPath = `${__dirname}/../../../uploads/${userTmpDir}`;
-    if (!fs.existsSync(userTmpDirPath)) {
-        fs.mkdirSync(userTmpDirPath);
-    }
-    let tmpFileName = `tmp_${strings.makeID(6)}_${req.files.document.name}`; // 872hd8_imenafajl.png
-    let tmpFilePath = `${userTmpDirPath}/${tmpFileName}`;
-    req.files.document.mv(tmpFilePath, err => {
-        if (err) {
-            return res.status(500).send('Internal server error');
-        }
-        res.status(201).send({ tmp_file_path: tmpFilePath });
-    }); 
-} */
 
 module.exports = {
     upload,
     download,
-    // tmpUpload
+    uploadAvatar,
+    remove
 };

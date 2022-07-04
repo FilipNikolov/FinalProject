@@ -23,7 +23,9 @@ api.use(jwt({
 api.use(fileUpload());
 
 api.post('/api/v1/storage', storage.upload);
+api.post('/api/v1/storage/avatar', storage.uploadAvatar);
 api.get('/api/v1/storage/:filename', storage.download);
+api.delete('/api/v1/storage/:filename', storage.remove);
 // api.post('/api/v1/tmp/storage', storage.tmpUpload)
 
 
