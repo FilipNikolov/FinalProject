@@ -124,3 +124,16 @@
     font-family: 'Roboto', sans-serif;
     font-weight: bolder;
   }
+  #chooseavatar img{
+    display: none;
+    
+    }
+    #chooseavatar img[src]{
+      border: 1px solid #A5A5A5 ;
+      border-radius: 50%;
+      display: block;
+      box-shadow: 0px 3px 6px #00000029;
+  }
+  #button-container{
+    padding-top: 20px;
+  }

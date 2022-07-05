@@ -1,7 +1,6 @@
 const { Validator } = require('node-input-validator');
 
 const Recipe = {
-    photo: 'required|string',
     title: 'required|string',
     type: 'required|string',
     description: 'required|string',

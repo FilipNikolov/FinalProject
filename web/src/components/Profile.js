@@ -3,11 +3,12 @@ import { ProfileNav } from "./ProfileNav";
 import "../css/profile.css";
 
 export function Profile() {
-
-
+    // const acc = localStorage.getItem("acc");
+    // const accValue = JSON.parse(acc);
 
     const [photo, setPhoto] = useState();
-    const [docs, setDocs] = useState();
+    const [docs, setDocs] = useState(null);
+
 
 
 
@@ -58,9 +59,11 @@ export function Profile() {
 
                         <form className="profile-form" onSubmit={submit}>
                             <div id="chooseavatar">
-                                <img id="recipeuploadphoto" src={photo} value={Profile.photo} border="0" width="300px" height="150px" />
-                                <label for="uploadbtn" id="btn-container">Upload Image</label>
-                                <input type="file" id="uploadbtn" onChange={handleUpload} />
+                                <img id="recipeuploadphoto" src={photo} value={Profile.photo} border="0" width="200px" height="200px" />
+                                <div id="button-container">
+                                    <label for="uploadbtn" id="btn-container">Upload Image</label>
+                                    <input type="file" id="uploadbtn" onChange={handleUpload} />
+                                </div>
                             </div>
                             <div id="changing-area">
                                 <div id="profileleftside">
@@ -76,9 +79,9 @@ export function Profile() {
                                     <button type="submit" id="save-btn">SAVE</button>
                                 </div>
                                 <div id="profilerightside">
-                                    <span class="inputtext" value={accData.lastname}>Last Name</span>
+                                    <span class="inputtext" >Last Name</span>
                                     <input type="text" name="lastname" placeholder="Last Name"></input>
-                                    <span class="inputtext" value={accData.birthday}>Birthday</span>
+                                    <span class="inputtext" >Birthday</span>
                                     <input type="date" name="birthday" id="date" />
                                     <span class="inputtext">Repeat Password</span>
                                     <input type="password" placeholder="Repeat Password"></input>

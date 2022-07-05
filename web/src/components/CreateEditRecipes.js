@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 export const CreateEditRecipes = () => {
     const RecipeDataInit = {
-        photo: String,
+        // photo: String,
         title: String,
         type: String,
         description: String,
@@ -21,12 +21,7 @@ export const CreateEditRecipes = () => {
     const [photo, setPhoto] = useState();
     const [docs, setDocs] = useState();
 
-    const inputChange = (e) => {
-        setRecipeData({
-            ...RecipeData,
-            [e.target.name]: e.target.value
-        });
-    };
+
 
     const UploadPhoto = new FormData();
     UploadPhoto.append("document", docs);
@@ -63,22 +58,27 @@ export const CreateEditRecipes = () => {
             });
 
             if (res.ok && resp.ok) {
-                navigator('/recipes');
+                res = await res.json();
+                localStorage.setItem("recipes", res)
+
             }
-            else if (!res.ok && !resp.ok) {
-                return 'Cannot add recipe!'
-            }
-            res = await res.json();
-            localStorage.setItem("recipes", res)
+            navigator('/recipes');
+
         } catch (err) {
             alert(err)
         }
 
     };
+    const inputChange = (e) => {
+        setRecipeData({
+            ...RecipeData,
+            [e.target.name]: e.target.value
+        });
+    };
 
-    // const uploadFiles = () => {
-    //     document.getElementById("uploadinput").click();
-    // };
+
+    const rec = localStorage.getItem("recipes");
+    const recepti = JSON.parse(rec)
 
     return (
         <>   <ProfileNav />
@@ -93,7 +93,7 @@ export const CreateEditRecipes = () => {
                         <div id="create-container">
                             <div id="image-container">
                                 <span>Recipe Image</span>
-                                <img id="recipeuploadphoto" src={photo} value={RecipeData.photo} border="0" width="300px" height="150px" />
+                                <img id="recipeuploadphoto" src={photo} border="0" width="300px" height="150px" />
                                 <label for="uploadbtn" id="btn-container">Upload Image</label>
                                 <input type="file" id="uploadbtn" onChange={handleUpload} />
                             </div>

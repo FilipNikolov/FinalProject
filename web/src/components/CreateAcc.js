@@ -10,6 +10,7 @@ export const CreateAcc = () => {
         firstname: String,
         lastname: String,
         password: String,
+        repeatpassword: String,
         email: String,
         birthday: Date
 
@@ -17,18 +18,14 @@ export const CreateAcc = () => {
     const navigator = useNavigate();
     const [regData, setRegData] = useState(RegDataInit);
 
-    const inputChange = (e) => {
-        setRegData({
-            ...regData,
-            [e.target.name]: (e.target.name !== 'birthday' ? e.target.value : Moment(new Date(e.target.value)).format("yyyy-MM-DD"))
 
-
-        });
-    };
 
     const submit = async (e) => {
-
+        e.preventDefault()
         try {
+            if (regData.repeatpassword !== regData.password) {
+                throw new Error("Password doesnt match!")
+            }
             let res = await fetch('http://localhost:10001/api/v1/auth/register', {
                 method: 'POST',
                 body: JSON.stringify(regData),
@@ -38,16 +35,23 @@ export const CreateAcc = () => {
 
             });
             if (!res.ok) {
-                throw 'Cannot create account!'
+                // res = await res.json();
+                // localStorage.setItem("acc", res)
+                throw new Error("cannot create acc!")
             }
-            res = await res.json();
-            localStorage.setItem("acc", res)
-            if (res.ok) {
-                navigator('/login');
-            }
+            navigator('/login');
+
         } catch (err) {
             alert(err)
         }
+    };
+    const inputChange = (e) => {
+        setRegData({
+            ...regData,
+            [e.target.name]: (e.target.name !== 'birthday' ? e.target.value : Moment(new Date(e.target.value)).format("yyyy-MM-DD"))
+
+
+        });
     };
 
     return (
@@ -101,7 +105,7 @@ export const CreateAcc = () => {
                                         <span class="inputtxt">Birthday</span>
                                         <input type="date" name="birthday" id="date" value={Moment(new Date(regData.birthday)).format("yyyy-MM-DD")} onChange={inputChange} placeholder="00-00-0000"></input>
                                         <span class="inputtxt">Repeat Password</span>
-                                        <input type="password" placeholder="Repeat Password"></input>
+                                        <input type="password" name="repeatpassword" value={regData.repeatpassword} onChange={inputChange} placeholder="Repeat Password"></input>
 
                                     </div>
                                 </div>

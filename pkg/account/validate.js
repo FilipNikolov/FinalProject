@@ -4,6 +4,7 @@ const Account = {
     firstname: 'required|string',
     lastname: 'required|string',
     password: 'required|string',
+    repeatpassword: 'required|string',
     email: 'required|string',
     birthday: 'required|date',
 
