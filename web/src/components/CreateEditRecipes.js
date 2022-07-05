@@ -77,8 +77,8 @@ export const CreateEditRecipes = () => {
     };
 
 
-    const rec = localStorage.getItem("recipes");
-    const recepti = JSON.parse(rec)
+    // const rec = localStorage.getItem("recipes");
+    // const recepti = JSON.parse(rec)
 
     return (
         <>   <ProfileNav />
