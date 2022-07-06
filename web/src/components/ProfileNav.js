@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../css/profilenav.css";
 import BabysLogo from "../imgs/logo_color.svg";
 
 export const ProfileNav = () => {
+
+    const removeToken = () => {
+        localStorage.removeItem("jwt")
+    }
+
     return (
         <ul type="none" id="nav">
             <li ><Link to="/profile"><img src={BabysLogo} /></Link></li>
@@ -21,7 +26,7 @@ export const ProfileNav = () => {
                 <li className="profilebullets">•</li>
                 <li id="profile"><Link to="/profile">My Profile</Link></li>
                 <li className="profilebullets">•</li>
-                <li id="logout"><Link to="/">Log out</Link></li>
+                <li id="logout" onClick={removeToken} ><Link to="/login">Log out</Link></li>
             </div>
         </ul >
     )

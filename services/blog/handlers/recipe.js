@@ -9,7 +9,7 @@ const dt = new Date();
 
 const getAll = async (req, res) => {
     try {
-        let ps = await recipes.getAll(req.user.id);
+        let ps = await recipes.getAll();
         return res.send(ps);
     } catch (err) {
         console.log(err);

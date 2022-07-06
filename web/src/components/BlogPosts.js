@@ -10,7 +10,7 @@ export const Blogposts = () => {
                 method: 'GET',
                 headers: {
                     'content-type': 'application/json',
-                    'authorization': `bearer ${localStorage.getItem('jwt')}`
+                    // 'authorization': `bearer ${localStorage.getItem('jwt')}`
                 }
             });
             let data = await res.json();
