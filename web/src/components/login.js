@@ -13,7 +13,7 @@ export const Login = () => {
     const [formData, setFormData] = useState(formDataInit);
     const [loggedin, setLoggedin] = useState(false);
     const navigator = useNavigate();
-    const token = localStorage.getItem('jwt');
+
 
 
 
@@ -33,6 +33,7 @@ export const Login = () => {
             }
             let data = await res.json();
             localStorage.setItem('jwt', data.token);
+            // localStorage.setItem('acc', JSON.stringify(data.acc));
             if (data.token) {
                 setLoggedin(true)
                 navigator('/profile')
@@ -43,52 +44,15 @@ export const Login = () => {
     };
 
 
-    const removeToken = () => {
-        localStorage.setItem('jwt', null)
-        setLoggedin(false)
 
-    }
 
     const inputChange = (e) => {
         setFormData({
             ...formData,
             [e.target.name]: e.target.value
         })
-    }
-    // const formDataInit = {
-    //     email: String,
-    //     password: String
-    // };
+    };
 
-    // const [formData, setFormData] = useState(formDataInit);
-
-    // const submit = async (e) => {
-    //     e.preventDefault();
-    //     console.log(formData);
-    //     try {
-    //         let res = await fetch('http://localhost:10001/api/v1/auth/login', {
-    //             method: 'POST',
-    //             body: JSON.stringify(formData),
-    //             headers: {
-    //                 'content-type': 'application/json'
-    //             }
-    //         });
-    //         if (!res.ok) {
-    //             throw 'Error logging in';
-    //         }
-    //         let data = await res.json();
-    //         localStorage.setItem('jwt', data.token);
-    //     } catch (err) {
-    //         alert(err);
-    //     }
-    // };
-
-    // const inputChange = (e) => {
-    //     setFormData({
-    //         ...formData,
-    //         [e.target.name]: e.target.value
-    //     });
-    // };
 
     return (
         <><Nav />
@@ -120,24 +84,18 @@ export const Login = () => {
                             </div>
                         </div>
                         <div id="loginblock">
-                            {loggedin === false ?
-                                <form onSubmit={submit} id="login-form">
-                                    <span class="inputtxt">Email</span>
-                                    <label className="login-area">
-                                        <input type="email" name="email" value={formData.email} onChange={inputChange} placeholder="user@domain.com" />
-                                    </label>
-                                    <span class="inputtxt">Password</span>
-                                    <label className="login-area">
-                                        <input type="password" name="password" value={formData.password} onChange={inputChange} placeholder="******" />
-                                    </label>
-                                    <button type="submit" className="login-btn">LOG IN</button>
-                                </form>
-                                :
-                                <div>
-                                    <h1 className="login-text">Logged in</h1>
-                                    <button onClick={removeToken} className="login-btn">Log Out</button>
-                                </div>
-                            }
+
+                            <form onSubmit={submit} id="login-form">
+                                <span class="inputtxt">Email</span>
+                                <label className="login-area">
+                                    <input type="email" name="email" value={formData.email} onChange={inputChange} placeholder="user@domain.com" />
+                                </label>
+                                <span class="inputtxt">Password</span>
+                                <label className="login-area">
+                                    <input type="password" name="password" value={formData.password} onChange={inputChange} placeholder="******" />
+                                </label>
+                                <button type="submit" className="login-btn">LOG IN</button>
+                            </form>
                         </div>
                     </div>
                 </div>

@@ -7,9 +7,19 @@ const {
 
 const dt = new Date();
 
+const getRecipes = async (req, res) => {
+    try {
+        let ps = await recipes.getRecipes();
+        return res.send(ps);
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send('Internal server error');
+    }
+
+};
 const getAll = async (req, res) => {
     try {
-        let ps = await recipes.getAll();
+        let ps = await recipes.getAll(req.user.id);
         return res.send(ps);
     } catch (err) {
         console.log(err);
@@ -42,7 +52,7 @@ const create = async (req, res) => {
             ...req.body,
             user_id: req.user.id,
             createdon: `${dt.getMonth() + 1}.${dt.getDate()}.${dt.getFullYear()}`,
-            grade: Math.random() * (50 - 4 + 1) + 6,
+            grade: 28,
         };
         let ps = await recipes.create(data);
         return res.status(201).send(ps);
@@ -93,6 +103,7 @@ const remove = async (req, res) => {
 };
 
 module.exports = {
+    getRecipes,
     getAll,
     getSingle,
     create,

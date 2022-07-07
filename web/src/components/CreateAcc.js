@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Nav } from "./Nav";
 import "../css/register.css";
@@ -16,7 +16,7 @@ export const CreateAcc = () => {
 
     };
     const navigator = useNavigate();
-    const [regData, setRegData] = useState(RegDataInit);
+    const [regData, setRegData] = useState({ RegDataInit });
 
 
 
@@ -35,8 +35,6 @@ export const CreateAcc = () => {
 
             });
             if (!res.ok) {
-                // res = await res.json();
-                // localStorage.setItem("acc", res)
                 throw new Error("cannot create acc!")
             }
             navigator('/login');
@@ -45,6 +43,12 @@ export const CreateAcc = () => {
             alert(err)
         }
     };
+    // const [acc, setAcc] = useState([]);
+
+    // useEffect(() => {
+    //     localStorage.setItem('acc', res);
+    // }, [res]);
+
     const inputChange = (e) => {
         setRegData({
             ...regData,

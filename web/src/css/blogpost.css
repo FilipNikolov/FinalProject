@@ -1,0 +1,179 @@
+@import url(https://fonts.google.com/specimen/Roboto#standard-styles);
+#blogpostpage{
+    width: 100%; 
+    height: 100%;
+    margin: 0;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+
+}
+.home-area{
+  width: 80%;
+  display: flex;
+
+  flex-direction: column;
+}
+.home-line{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: baseline;
+}
+
+.home-line .blogposttitle {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  color: #96BB36;
+  font-family:'Roboto', sans-serif;
+  font-weight: 700;
+  letter-spacing:-1px;
+  
+}
+.homeline{
+  background-color: #D8D8D8;
+  height: 1.5px;
+  width: 87%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+#secondline{
+  background-color: #D8D8D8;
+  height: 1.5px;
+  width: 79%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+#newrecipes-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 70px;
+    padding-bottom: 70px;
+    padding-top: 70px;
+}
+#popularrecipes-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items:baseline;
+    gap: 70px;
+    padding-bottom: 70px;
+    padding-top: 70px;
+}
+
+.cart{
+    background-color: #FFFFFF;
+    width: 400px;
+    height: 450px;
+    border-radius:7px;
+    box-shadow: 0px 3px 6px #00000029;
+    display: flex;
+    flex-direction: column;
+    
+}
+ .cart .textbox{
+   height: 50%;
+    width: 100%;
+   padding-left: 30px;
+   display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    align-items: flex-start;
+ }
+ .textbox .recipetitle{
+    color: #F0972A;
+    font-family:'Roboto', sans-serif;
+    font-weight: 600;
+ }
+ .textbox .recipedescription{
+    color: #A5A5A5;
+    height: 100px;
+    width: 100%;
+    font-family:'Roboto', sans-serif;
+    font-weight: 100;
+ }
+.blogpostpage span {
+    color: #626262;
+ }
+ .info-container{
+  width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+ }
+ .info-container .arrow {
+    padding-right: 20px;
+    display: flex;
+    align-items: flex-end;
+    cursor: pointer;
+ }
+ .textbox  .recipeinfos {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
+ }
+ .recipeinfos .icons {
+    width: 20px;
+ }
+ .recipeinfos .time-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+ }
+ .recipeinfos .portion-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+ }
+ .recipeinfos .grade-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+ }
+ .cart .img-container{
+    height: 60%;
+    width: 80%;
+   padding-left: 30px;
+   display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    align-items: flex-start;
+ }
+ .cart .type-position{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-top: 20px;
+    position: relative;
+ }
+ .cart .type {
+    background-color: #96BB36;
+    width: 80px;
+    height: 30px;
+    border-radius: 20px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family:'Roboto', sans-serif;
+    font-weight: 600;
+}
+.arrow img{
+    padding: 10px;
+    background-color: #96BB36;
+    border-radius: 8px; 
+}

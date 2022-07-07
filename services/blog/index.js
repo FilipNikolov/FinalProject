@@ -16,8 +16,14 @@ api.use(express.json());
 api.use(jwt({
     secret: config.get('security').jwt_key,
     algorithms: ['HS256']
+}).unless({
+    path: [
+        '/api/v1/recipes/allrecipes',
+
+    ]
 }));
 
+api.get('/api/v1/recipes/allrecipes', recipe.getRecipes)
 api.get('/api/v1/recipes', recipe.getAll);
 api.get('/api/v1/recipes/:id', recipe.getSingle);
 api.post('/api/v1/recipes', recipe.create);

@@ -3,8 +3,7 @@ import { ProfileNav } from "./ProfileNav";
 import "../css/profile.css";
 
 export function Profile() {
-    // const acc = localStorage.getItem("acc");
-    // const accValue = JSON.parse(acc);
+
 
     const [photo, setPhoto] = useState();
     const [docs, setDocs] = useState(null);

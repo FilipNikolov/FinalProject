@@ -15,13 +15,13 @@ const Recipe = mongoose.model(
 },
     'recipes'
 );
-const getAll = async () => {
-    return await find(recipes);
+const getRecipes = async () => {
+    return await Recipe.find();
+};
+const getAll = async (user_id) => {
+    return await Recipe.find({ user_id });
 
 };
-const getByType = async (type) => {
-    return await Recipe.find({ type })
-}
 const getSingle = async (user_id, id) => {
     return await Recipe.findOne({ user_id, _id: id });
 };
@@ -40,6 +40,7 @@ const remove = async (id) => {
 };
 
 module.exports = {
+    getRecipes,
     getAll,
     getSingle,
     create,
