@@ -4,6 +4,7 @@ import timeIcon from "../imgs/icon_time.svg";
 import plateIcon from "../imgs/icon_plate.svg";
 import starIcon from "../imgs/icon_star.svg";
 import arrowIcon from "../imgs/icon_arrows_white.svg";
+
 export const Blogposts = () => {
 
     const [recipes, setRecipes] = useState([]);
@@ -43,19 +44,21 @@ export const Blogposts = () => {
                                 </div>
                                 <div class="textbox">
                                     <h1 class="recipetitle">{r.title}</h1>
-                                    <span class="recipedescription">{r.description}</span>
+                                    <span class="recipedescription">{r.description.slice(0, 150)}</span>
                                     <div class="recipeinfos">
-                                        <div class="time-container">
-                                            <img src={timeIcon} alt="" class="icons" />
-                                            <span class="timetoprepare">{r.timetoprepare}</span>
-                                        </div>
-                                        <div class="portion-container">
-                                            <img src={plateIcon} alt="" class="icons" />
-                                            <span class="numberofportion">{r.numberofportion} persons</span>
-                                        </div>
-                                        <div class="grade-container">
-                                            <img src={starIcon} alt="" class="icons" />
-                                            <span class="gradeofrecipe">{r.grade}</span>
+                                        <div class="recipe-info">
+                                            <div class="time-container">
+                                                <img src={timeIcon} alt="" class="icons" />
+                                                <span class="aboutrecipe">{r.timetoprepare}</span>
+                                            </div>
+                                            <div class="portion-container">
+                                                <img src={plateIcon} alt="" class="icons" />
+                                                <span class="aboutrecipe">{r.numberofportion} persons</span>
+                                            </div>
+                                            <div class="grade-container">
+                                                <img src={starIcon} alt="" class="icons" />
+                                                <span class="aboutrecipe">{r.grade}</span>
+                                            </div>
                                         </div>
                                         <div class="arrow"><img src={arrowIcon} alt="" /></div>
                                     </div>
@@ -81,28 +84,26 @@ export const Blogposts = () => {
                                 </div>
                                 <div class="textbox">
                                     <h1 class="recipetitle">{r.title}</h1>
-                                    <span class="recipedescription">{r.description}</span>
-                                    <div className="info-container">
-                                        <div class="recipeinfos">
+                                    <span class="recipedescription">{r.description.slice(0, 150)}</span>
+                                    <div class="recipeinfos">
+                                        <div class="recipe-info">
                                             <div class="time-container">
                                                 <img src={timeIcon} alt="" class="icons" />
-                                                <span class="timetoprepare">{r.timetoprepare}</span>
+                                                <span class="aboutrecipe">{r.timetoprepare}</span>
                                             </div>
                                             <div class="portion-container">
                                                 <img src={plateIcon} alt="" class="icons" />
-                                                <span class="numberofportion">{r.numberofportion} persons</span>
+                                                <span class="aboutrecipe">{r.numberofportion} persons</span>
                                             </div>
                                             <div class="grade-container">
                                                 <img src={starIcon} alt="" class="icons" />
-                                                <span class="gradeofrecipe">{r.grade}</span>
+                                                <span class="aboutrecipe">{r.grade}</span>
                                             </div>
                                         </div>
                                         <div class="arrow"><img src={arrowIcon} alt="" /></div>
                                     </div>
                                 </div>
                             </div>
-
-
                         )
                     })}
                 </div>

@@ -11,8 +11,7 @@
 .home-area{
   width: 80%;
   display: flex;
-
-  flex-direction: column;
+flex-direction: column;
 }
 .home-line{
   width: 100%;
@@ -100,28 +99,36 @@
     font-family:'Roboto', sans-serif;
     font-weight: 100;
  }
-.blogpostpage span {
+.textbox .aboutrecipe {
     color: #626262;
- }
- .info-container{
-  width: 100%;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
- }
- .info-container .arrow {
-    padding-right: 20px;
-    display: flex;
-    align-items: flex-end;
-    cursor: pointer;
- }
- .textbox  .recipeinfos {
-    display: flex;
+    font-size: 15px;
+   }
+   .recipeinfos {
+      width: 100%;
+      display: flex;
+       flex-direction: row;
+       flex-wrap: wrap;
+       justify-content: space-between;
+       align-items: center;
+    
+    }
+  .recipe-info {
+   display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: center;
     gap: 15px;
+  }
+ .recipeinfos .arrow {
+    padding-right: 20px;
+    display: flex;
+    align-items: flex-end;
+    cursor: pointer;
+ }
+ .textbox .recipedescription {
+   padding-top: 10px;
+   width: 90%;
  }
  .recipeinfos .icons {
     width: 20px;

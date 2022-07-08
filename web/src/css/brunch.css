@@ -1,0 +1,18 @@
+#brunch{
+    width: 100%; 
+    height: 100%;
+    margin: 0;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+}
+#brunch-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 70px;
+    padding-bottom: 70px;
+    padding-top: 70px;
+}
