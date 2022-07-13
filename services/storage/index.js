@@ -21,18 +21,18 @@ api.use(jwt({
 }).unless({
     path: [
         '/api/v1/storage/:filename',
-        '/api/v1/liststorage'
+        // '/api/v1/liststorage'
     ]
 }));
 
 api.use(fileUpload());
 
 api.post('/api/v1/storage', storage.upload);
-api.get('/api/v1/liststorage', storage.readfiles)
+// api.get('/api/v1/liststorage', storage.readfiles)
 api.post('/api/v1/storage/avatar', storage.uploadAvatar);
 api.get('/api/v1/storage/:filename', storage.download);
 api.delete('/api/v1/storage/:filename', storage.remove);
-api.get('/api/v1/storagetest', storage.test);
+// api.get('/api/v1/storagetest', storage.test);
 
 
 

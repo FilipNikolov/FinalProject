@@ -30,18 +30,18 @@ const upload = async (req, res) => {
         return res.status(201).send({ file_name: fullFileName });
     });
 };
-const readfiles = async (req, res) => {
-    try {
-        const userDir = `user_${req.user.id}`;
-        const userDirPath = `${__dirname}/../uploads/${userDir}`;
-        let filePath = `${userDirPath}/${userDir}`;
-        const files = fs.readdirSync(filePath);
-        return res.status(200).send(files);
-    } catch (error) {
-        console.log(error);
-        return res.status(500).send("Internal Server Error");
-    }
-};
+// const readfiles = async (req, res) => {
+//     try {
+//         const userDir = `user_${req.user.id}`;
+//         const userDirPath = `${__dirname}/../uploads/${userDir}`;
+//         let filePath = `${userDirPath}/${userDir}`;
+//         const files = fs.readdirSync(filePath);
+//         return res.status(200).send(files);
+//     } catch (error) {
+//         console.log(error);
+//         return res.status(500).send("Internal Server Error");
+//     }
+// };
 const uploadAvatar = async (req, res) => {
     if (DATA_SIZE < req.files.document.size) {
         return res.status(400).send("File upload is too large");
@@ -92,7 +92,7 @@ const test = async (req, res) => {
 
 module.exports = {
     upload,
-    readfiles,
+    // readfiles,
     download,
     uploadAvatar,
     remove,
