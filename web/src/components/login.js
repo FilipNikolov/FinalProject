@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Nav } from "./Nav";
 import "../css/login.css";
@@ -11,7 +11,6 @@ export const Login = () => {
     }
 
     const [formData, setFormData] = useState(formDataInit);
-    const [loggedin, setLoggedin] = useState(false);
     const navigator = useNavigate();
 
 
@@ -33,18 +32,13 @@ export const Login = () => {
             }
             let data = await res.json();
             localStorage.setItem('jwt', data.token);
-            // localStorage.setItem('acc', JSON.stringify(data.acc));
             if (data.token) {
-                setLoggedin(true)
                 navigator('/profile')
             }
         } catch (err) {
             alert(err);
         }
     };
-
-
-
 
     const inputChange = (e) => {
         setFormData({

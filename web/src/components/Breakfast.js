@@ -7,7 +7,11 @@ import plateIcon from "../imgs/icon_plate.svg";
 import starIcon from "../imgs/icon_star.svg";
 import arrowIcon from "../imgs/icon_arrows_white.svg";
 
+
 export function Breakfast() {
+    const acc = localStorage.getItem("jwt");
+
+
     const [recipes, setRecipes] = useState([]);
 
     const getRecipes = async () => {

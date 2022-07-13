@@ -8,7 +8,7 @@ export const Nav = () => {
         <ul type="none" id="nav">
             <li ><Link to="/"><img src={BabysLogo} /></Link></li>
             <div id="menu">
-                <li ><Link to="/breakfast">Breakfast</Link></li>
+                <li  ><Link to="/breakfast">Breakfast</Link></li>
                 <li className="bullets">•</li>
                 <li><Link to="/brunch">Brunch</Link></li>
                 <li className="bullets">•</li>

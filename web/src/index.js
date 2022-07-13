@@ -13,6 +13,7 @@ import { Recipes } from "./components/Recipes";
 import { CreateEditRecipes } from "./components/CreateEditRecipes";
 import { EditRecipes } from "./components/EditRecipes";
 import { Home } from "./components/Home";
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(

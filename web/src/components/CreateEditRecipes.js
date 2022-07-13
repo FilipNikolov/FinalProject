@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 export const CreateEditRecipes = () => {
     const RecipeDataInit = {
-        // photo: String,
+        photopath: String,
         title: String,
         type: String,
         description: String,
@@ -36,6 +36,7 @@ export const CreateEditRecipes = () => {
 
 
     const submit = async (e) => {
+
         e.preventDefault();
         try {
             let resp = await fetch('http://localhost:10003/api/v1/storage', {
@@ -44,8 +45,8 @@ export const CreateEditRecipes = () => {
                 headers: {
                     'authorization': `bearer ${localStorage.getItem("jwt")}`
                 }
-
             });
+
 
             let res = await fetch('http://localhost:10002/api/v1/recipes', {
                 method: 'POST',
@@ -75,10 +76,6 @@ export const CreateEditRecipes = () => {
             [e.target.name]: e.target.value
         });
     };
-
-
-    // const rec = localStorage.getItem("recipes");
-    // const recepti = JSON.parse(rec)
 
     return (
         <>   <ProfileNav />

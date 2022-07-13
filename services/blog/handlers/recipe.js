@@ -53,6 +53,7 @@ const create = async (req, res) => {
             user_id: req.user.id,
             createdon: `${dt.getMonth() + 1}.${dt.getDate()}.${dt.getFullYear()}`,
             grade: 28,
+
         };
         let ps = await recipes.create(data);
         return res.status(201).send(ps);

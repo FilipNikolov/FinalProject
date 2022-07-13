@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Recipe = mongoose.model(
     'recipes', {
     user_id: String,
-    photo: String,
+    photopath: String,
     title: String,
     type: String,
     description: String,

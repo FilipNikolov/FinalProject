@@ -14,7 +14,7 @@ const upload = async (req, res) => {
     }
 
     const userDir = `user_${req.user.id}`;
-    const userDirPath = `${__dirname}/../../../uploads/${userDir}`;
+    const userDirPath = `${__dirname}/../uploads/${userDir}`;
 
     if (!fs.existsSync(userDirPath)) {
         fs.mkdirSync(userDirPath);
@@ -22,12 +22,25 @@ const upload = async (req, res) => {
     const fileName = `${makeID(6)}_${req.files.document.name}`;
     const filePath = `${userDirPath}/${fileName}`;
 
+    const fullFileName = `${userDir}/${fileName}`;
     req.files.document.mv(filePath, (err) => {
         if (err) {
             return res.status(500).send("Internal Server Error");
         }
-        return res.status(201).send({ file_name: fileName });
+        return res.status(201).send({ file_name: fullFileName });
     });
+};
+const readfiles = async (req, res) => {
+    try {
+        const userDir = `user_${req.user.id}`;
+        const userDirPath = `${__dirname}/../uploads/${userDir}`;
+        let filePath = `${userDirPath}/${userDir}`;
+        const files = fs.readdirSync(filePath);
+        return res.status(200).send(files);
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send("Internal Server Error");
+    }
 };
 const uploadAvatar = async (req, res) => {
     if (DATA_SIZE < req.files.document.size) {
@@ -39,7 +52,7 @@ const uploadAvatar = async (req, res) => {
     }
 
     const userDir = `user_${req.user.id}`;
-    const userDirPath = `${__dirname}/../../../uploads/${userDir}`;
+    const userDirPath = `${__dirname}/../uploads/${userDir}`;
 
     if (!fs.existsSync(userDirPath)) {
         fs.mkdirSync(userDirPath);
@@ -57,7 +70,7 @@ const uploadAvatar = async (req, res) => {
 
 const download = async (req, res) => {
     let userDir = `user_${req.user.id}`;
-    let userDirPath = `${__dirname}/../../../uploads/${userDir}`;
+    let userDirPath = `${__dirname}/../uploads/${userDir}`;
     let filePath = `${userDirPath}/${req.params.filename}`;
     if (!fs.existsSync(filePath)) {
         return res.status(404).send("File not foud");
@@ -65,19 +78,23 @@ const download = async (req, res) => {
     res.download(filePath);
 };
 const remove = async (req, res) => {
-    let userDir = `images`;
-    let userDirPath = `${__dirname}/../../../uploads/${userDir}`;
-    let filePath = `${userDirPath}/${req.params.filename}`;
+    let userDir = `uploads`;
+    const userDirPath = `${__dirname}/../uploads/${userDir}`;
+    const filePath = `${userDirPath}/${fileName}`;
     if (fs.existsSync(filePath)) {
         fs.unlinkSync(filePath)
         return res.status(204).send('File deleted');
     }
 };
-
+const test = async (req, res) => {
+    return __dirname;
+};
 
 module.exports = {
     upload,
+    readfiles,
     download,
     uploadAvatar,
-    remove
+    remove,
+    test
 };
