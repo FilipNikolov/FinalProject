@@ -9,6 +9,7 @@
    padding: 0px;
    display: flex;
    justify-content: center;
+  padding-bottom: 400px;
   }
   
   #recipes-area{
@@ -175,4 +176,8 @@ justify-content: flex-start;
   width: 300px;
   display: flex;
   justify-content: center;
+}
+#edit-area{
+  width: 80%;
+
 }

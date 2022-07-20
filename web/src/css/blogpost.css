@@ -1,4 +1,8 @@
 @import url(https://fonts.google.com/specimen/Roboto#standard-styles);
+#maindhomediv{
+   width: 100%;
+   height: 100%;
+}
 #blogpostpage{
     width: 100%; 
     height: 100%;
@@ -6,6 +10,7 @@
     padding: 0px;
     display: flex;
     justify-content: center;
+    padding-bottom: 170px;
 
 }
 .home-area{
@@ -76,10 +81,12 @@ flex-direction: column;
     box-shadow: 0px 3px 6px #00000029;
     display: flex;
     flex-direction: column;
+
     
 }
+
  .cart .textbox{
-   height: 50%;
+   height: 45%;
     width: 100%;
    padding-left: 30px;
    display: flex;
@@ -91,6 +98,7 @@ flex-direction: column;
     color: #F0972A;
     font-family:'Roboto', sans-serif;
     font-weight: 600;
+    padding-top: 20px;
  }
  .textbox .recipedescription{
     color: #A5A5A5;
@@ -152,23 +160,26 @@ flex-direction: column;
     gap: 3px;
  }
  .cart .img-container{
-    height: 60%;
-    width: 80%;
-   padding-left: 30px;
-   display: flex;
-    flex-direction: column;
-    justify-content:flex-start;
-    align-items: flex-start;
- }
+    height: 55%;
+    width: 100%;
+   }
  .cart .type-position{
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    padding-top: 20px;
-    position: relative;
+   height: 100%; 
+   width: 100%;
+   position: relative;
+  text-align: center;
+  color: white;
  }
- .cart .type {
+ #imgoffood{
+   width: 100%;
+   height: 100%;
+   position: static;
+}
+ .type-position .type {
     background-color: #96BB36;
+    position: absolute;
+    top: 12px;
+    left: 20px;
     width: 80px;
     height: 30px;
     border-radius: 20px;
@@ -179,8 +190,17 @@ flex-direction: column;
     font-family:'Roboto', sans-serif;
     font-weight: 600;
 }
+.arrow {
+   cursor: pointer;
+}
 .arrow img{
     padding: 10px;
     background-color: #96BB36;
     border-radius: 8px; 
+}
+.arrow img:hover {
+padding: 11px;
+transition: 0.1s;
+box-shadow: 0px 9px 12px #00000060;
+
 }

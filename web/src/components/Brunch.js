@@ -20,13 +20,18 @@ export function Brunch() {
                 }
             });
             let data = await res.json();
+            data.forEach(item => {
+                item.photopath = "http://localhost:10003/" + item.photopath;
+            });
             setRecipes(data);
+
         } catch (err) {
             console.log(err);
         }
     };
-    const customClick = () => {
+    const customClick = (recipe) => {
         document.getElementById("myForm").style.display = "block";
+        setPopup(recipe)
     };
     const brunch = recipes.filter(recipes => recipes.type === "Brunch")
     useEffect(() => { getRecipes() }, []);
@@ -42,12 +47,12 @@ export function Brunch() {
                     <div id="brunch-container">
                         {brunch.map(recipe => {
                             return (
-                                <div class="cart" onClick={() => { customClick(); setPopup(recipe) }} key={recipe._id}>
+                                <div class="cart" key={recipe._id} >
                                     <div class="img-container">
                                         <div class="type-position">
                                             <p class="type">{recipe.type}</p>
+                                            <img id="imgoffood" src={recipe.photopath}></img>
                                         </div>
-                                        <img />
                                     </div>
                                     <div class="textbox">
                                         <h1 class="recipetitle">{recipe.title}</h1>
@@ -67,7 +72,7 @@ export function Brunch() {
                                                     <span class="aboutrecipe">{recipe.grade}</span>
                                                 </div>
                                             </div>
-                                            <div class="arrow"><img src={arrowIcon} alt="" /></div>
+                                            <div class="arrow" onClick={() => { customClick(recipe) }}><img src={arrowIcon} alt="" /></div>
                                         </div>
                                     </div>
                                 </div>
@@ -81,7 +86,9 @@ export function Brunch() {
                         <h1 id="popup-title">{popup.title}</h1>
                         <div id="main-content">
                             <div id="leftside">
-                                <div id="img-container"></div>
+                                <div id="popup-img-container">
+                                    <img class="popupimg" src={popup.photopath} alt="" />
+                                </div>
                                 <div id="typeofrecipe">
                                     <div id="bestserved">Best Served For</div>
                                     <div id="recipetype">{popup.type}</div>

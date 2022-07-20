@@ -24,19 +24,23 @@ export function Breakfast() {
                 }
             });
             let data = await res.json();
+            data.forEach(item => {
+                item.photopath = "http://localhost:10003/" + item.photopath;
+            });
             setRecipes(data);
+
         } catch (err) {
             console.log(err);
         }
     };
-    const customClick = () => {
+    const customClick = (recipe) => {
         document.getElementById("myForm").style.display = "block";
+        setPopup(recipe)
     };
     const breakfast = recipes.filter(recipes => recipes.type === "Breakfast")
     useEffect(() => { getRecipes() }, []);
     return (
-        <>
-            <Nav />
+        <><Nav />
             <div id="breakfast">
                 <div class="home-area">
                     <div class="home-line">
@@ -46,12 +50,12 @@ export function Breakfast() {
                     <div id="breakfast-container">
                         {breakfast.map(recipe => {
                             return (
-                                <div class="cart" onClick={() => { customClick(); setPopup(recipe) }} key={recipe._id}>
+                                <div class="cart" key={recipe._id} >
                                     <div class="img-container">
                                         <div class="type-position">
                                             <p class="type">{recipe.type}</p>
+                                            <img id="imgoffood" src={recipe.photopath}></img>
                                         </div>
-                                        <img />
                                     </div>
                                     <div class="textbox">
                                         <h1 class="recipetitle">{recipe.title}</h1>
@@ -71,7 +75,7 @@ export function Breakfast() {
                                                     <span class="aboutrecipe">{recipe.grade}</span>
                                                 </div>
                                             </div>
-                                            <div class="arrow"><img src={arrowIcon} alt="" /></div>
+                                            <div class="arrow" onClick={() => { customClick(recipe) }}><img src={arrowIcon} alt="" /></div>
                                         </div>
                                     </div>
                                 </div>
@@ -85,7 +89,9 @@ export function Breakfast() {
                         <h1 id="popup-title">{popup.title}</h1>
                         <div id="main-content">
                             <div id="leftside">
-                                <div id="img-container"></div>
+                                <div id="popup-img-container">
+                                    <img class="popupimg" src={popup.photopath} alt="" />
+                                </div>
                                 <div id="typeofrecipe">
                                     <div id="bestserved">Best Served For</div>
                                     <div id="recipetype">{popup.type}</div>

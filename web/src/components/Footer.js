@@ -7,7 +7,7 @@ export function Footer() {
     return (
         <div id="fot">
             <ul type="none" id="footer">
-                <li ><Link to="/Home"><img src={BabysWhite} /></Link></li>
+                <li ><Link to="/"><img src={BabysWhite} /></Link></li>
                 <div id="fotermenu">
                     <li className="foot"><Link to="/breakfast">Breakfast</Link></li>
                     <li className="discs">•</li>

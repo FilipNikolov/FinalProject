@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Nav } from "./Nav";
 import "../css/register.css";
@@ -12,7 +12,8 @@ export const CreateAcc = () => {
         password: String,
         repeatpassword: String,
         email: String,
-        birthday: Date
+        birthday: Date,
+        avatar: String
 
     };
     const navigator = useNavigate();
@@ -24,7 +25,7 @@ export const CreateAcc = () => {
         e.preventDefault()
         try {
             if (regData.repeatpassword !== regData.password) {
-                throw new Error("Password doesnt match!")
+                throw new Error("Passwords Doesen't Match!")
             }
             let res = await fetch('http://localhost:10001/api/v1/auth/register', {
                 method: 'POST',
@@ -35,19 +36,15 @@ export const CreateAcc = () => {
 
             });
             if (!res.ok) {
-                throw new Error("cannot create acc!")
+                throw new Error("Cannot Create Acc!")
             }
             navigator('/login');
+            alert('Account created!');
 
         } catch (err) {
             alert(err)
         }
     };
-    // const [acc, setAcc] = useState([]);
-
-    // useEffect(() => {
-    //     localStorage.setItem('acc', res);
-    // }, [res]);
 
     const inputChange = (e) => {
         setRegData({

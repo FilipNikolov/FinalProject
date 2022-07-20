@@ -5,5 +5,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    
+    z-index: 1;
+}
+#footer {
+    z-index: -1;
 }

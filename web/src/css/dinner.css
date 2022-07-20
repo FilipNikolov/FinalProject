@@ -5,6 +5,7 @@
     padding: 0px;
     display: flex;
     justify-content: center;
+    padding-bottom: 200px;
 }
 #dinner-container{
     display: flex;

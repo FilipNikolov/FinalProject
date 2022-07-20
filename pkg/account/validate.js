@@ -7,13 +7,18 @@ const Account = {
     repeatpassword: 'required|string',
     email: 'required|string',
     birthday: 'required|date',
-
 };
-
-
 const AccountLogin = {
     email: 'required|email',
     password: 'required|string',
+};
+const UpdateProfile = {
+    firstname: 'required|string',
+    lastname: 'required|string',
+    password: 'required|string',
+    email: 'required|string',
+    birthday: 'required|string',
+
 };
 
 const validate = async (data, schema) => {
@@ -30,5 +35,6 @@ const validate = async (data, schema) => {
 module.exports = {
     Account,
     AccountLogin,
+    UpdateProfile,
     validate
 };

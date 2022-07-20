@@ -8,7 +8,7 @@ export function App() {
   return (
     <div id="app">
       <Outlet />
-      <Footer />
+      <Footer id="footer" />
     </div>
 
   )

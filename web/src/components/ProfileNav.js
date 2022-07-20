@@ -11,7 +11,7 @@ export const ProfileNav = () => {
 
     return (
         <ul type="none" id="nav">
-            <li ><Link to="/profile"><img src={BabysLogo} /></Link></li>
+            <li ><Link to="/"><img src={BabysLogo} /></Link></li>
             <div id="menu">
                 <li ><Link to="/breakfast">Breakfast</Link></li>
                 <li className="bullets">•</li>

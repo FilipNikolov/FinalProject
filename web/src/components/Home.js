@@ -7,7 +7,6 @@ import "../css/home.css";
 export function Home() {
     return (
         <div id="home">
-            <Nav />
             <Blogposts />
         </div>
     )

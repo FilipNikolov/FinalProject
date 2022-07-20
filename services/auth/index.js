@@ -25,7 +25,9 @@ api.use(jwt({
 
 api.post('/api/v1/auth/login', auth.login);
 api.post('/api/v1/auth/register', auth.register);
+api.patch('/api/v1/auth/update/myprofile', auth.updateprofile);
 api.get('/api/v1/auth/refresh-token', auth.refreshToken);
+api.get('/api/v1/auth/get/myprofile', auth.getAccByEmail);
 
 
 

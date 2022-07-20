@@ -11,7 +11,6 @@ import { CreateAcc } from "./components/CreateAcc";
 import { Profile } from "./components/Profile";
 import { Recipes } from "./components/Recipes";
 import { CreateEditRecipes } from "./components/CreateEditRecipes";
-import { EditRecipes } from "./components/EditRecipes";
 import { Home } from "./components/Home";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -31,7 +30,6 @@ root.render(
         <Route path="/recipes">
           <Route path="" element={<Recipes />} />
           <Route path="/recipes/create" element={<CreateEditRecipes />} />
-          <Route path="/recipes/edit" element={<EditRecipes />} />
         </Route>
       </Route>
     </Routes>

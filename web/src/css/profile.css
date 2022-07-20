@@ -24,7 +24,16 @@
     align-items: baseline;
   }
   
-  
+  input {
+    color: #A5A5A5;
+    font-weight: 600;
+  }
+  textarea {
+    color: #A5A5A5;
+    font-weight: 600;
+  }
+
+
   #profile-line #title {
     display: flex;
     justify-content: flex-start;
@@ -124,16 +133,22 @@
     font-family: 'Roboto', sans-serif;
     font-weight: bolder;
   }
-  #chooseavatar img{
-    display: none;
-    
+
+    #chooseavatar{
+   
     }
     #chooseavatar img[src]{
       border: 1px solid #A5A5A5 ;
       border-radius: 50%;
-      display: block;
+      width: 200px;
+      height: 200px;
       box-shadow: 0px 3px 6px #00000029;
   }
   #button-container{
     padding-top: 20px;
+  }
+  #avataruploadphoto{
+          display: flex;
+      justify-content: center;
+      align-items: center;
   }

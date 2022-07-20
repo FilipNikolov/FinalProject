@@ -1,7 +1,8 @@
 const {
     validate,
-    Accout,
-    AccoutLogin
+    Account,
+    UpdateProfile,
+    AccountLogin
 } = require('../../../pkg/account/validate');
 const account = require('../../../pkg/account');
 const bcrypt = require('bcryptjs');
@@ -10,7 +11,7 @@ const config = require('../../../pkg/config');
 
 const login = async (req, res) => {
     try {
-        await validate(req.body, AccoutLogin);
+        await validate(req.body, AccountLogin);
         let acc = await account.getByEmail(req.body.email);
         if (!acc) {
             throw {
@@ -28,7 +29,7 @@ const login = async (req, res) => {
             firstname: acc.firstname,
             email: acc.email,
             id: acc._id,
-            exp: new Date().getTime() / 1000 + 7 * 24 * 60 * 60
+            exp: new Date().getTime() / 1000 + 7 * 24 * 60 * 60,
         };
         let token = jwt.sign(payload, config.get('security').jwt_key);
         return res.status(200).send({ token });
@@ -36,11 +37,11 @@ const login = async (req, res) => {
         console.log(err);
         return res.status(err.code).send(err.error)
     }
-}
+};
 
 const register = async (req, res) => {
     try {
-        await validate(req.body, Accout);
+        await validate(req.body, Account);
         let exists = await account.getByEmail(req.body.email);
         if (exists) {
             throw {
@@ -56,6 +57,39 @@ const register = async (req, res) => {
         return res.status(err.code).send(err.error);
     }
 };
+const updateprofile = async (req, res) => {
+    try {
+        await validate(req.body, UpdateProfile);
+        req.body.password = bcrypt.hashSync(req.body.password)
+        let data = {
+            ...req.body,
+            id: req.user.id
+        };
+        let acc = await account.update(req.user.id, data);
+        return res.status(204).send(acc);
+    } catch (err) {
+        console.log(err);
+        return res.status(err.code).send(err.error);
+    }
+};
+
+
+const getAccByEmail = async (req, res) => {
+    try {
+        let ps = await account.getByEmail(req.user.email);
+        if (!ps) {
+            throw {
+                code: 404,
+                error: 'Account not found'
+            }
+        }
+        return res.send(ps);
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send('Internal server error');
+    }
+};
+
 
 const refreshToken = async (req, res) => {
     let payload = {
@@ -69,5 +103,7 @@ const refreshToken = async (req, res) => {
 module.exports = {
     login,
     register,
+    getAccByEmail,
+    updateprofile,
     refreshToken
 }

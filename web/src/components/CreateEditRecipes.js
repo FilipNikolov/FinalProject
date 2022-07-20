@@ -16,6 +16,7 @@ export const CreateEditRecipes = () => {
         numberofportion: Number,
         recipe: String,
     };
+
     const navigator = useNavigate();
     const [RecipeData, setRecipeData] = useState(RecipeDataInit);
     const [photo, setPhoto] = useState();
@@ -23,11 +24,12 @@ export const CreateEditRecipes = () => {
 
 
 
-    const UploadPhoto = new FormData();
-    UploadPhoto.append("document", docs);
+
+    const imgUpload = new FormData();
+    imgUpload.append("document", docs);
 
 
-    const handleUpload = (e) => {
+    const imgUpl = (e) => {
         setPhoto(URL.createObjectURL(e.target.files[0]));
         setDocs(e.target.files[0]);
         console.log(setDocs)
@@ -41,12 +43,21 @@ export const CreateEditRecipes = () => {
         try {
             let resp = await fetch('http://localhost:10003/api/v1/storage', {
                 method: 'POST',
-                body: UploadPhoto,
+                body: imgUpload,
                 headers: {
                     'authorization': `bearer ${localStorage.getItem("jwt")}`
                 }
-            });
 
+            });
+            if (resp.ok) {
+                let json = await resp.json();
+                RecipeData.photopath = json.file_name;
+
+                console.log(json)
+
+            } else {
+                console.log(resp)
+            }
 
             let res = await fetch('http://localhost:10002/api/v1/recipes', {
                 method: 'POST',
@@ -92,7 +103,7 @@ export const CreateEditRecipes = () => {
                                 <span>Recipe Image</span>
                                 <img id="recipeuploadphoto" src={photo} border="0" width="300px" height="150px" />
                                 <label for="uploadbtn" id="btn-container">Upload Image</label>
-                                <input type="file" id="uploadbtn" onChange={handleUpload} />
+                                <input type="file" id="uploadbtn" onChange={imgUpl} />
                             </div>
                             <div id="recipe-info">
                                 <div id="recipetitle">
