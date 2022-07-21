@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Nav } from "./Nav";
 import "../css/profile.css";
 import Moment from "moment";
-import Avatar from "../imgs/defaultavatar.jpg";
+import profilepic from "../imgs/defaultavatar.jpg";
 
 export function Profile() {
     const [firstname, setFirstname] = useState("");
@@ -55,7 +55,7 @@ export function Profile() {
         if (password !== repeatpassword) {
             throw new Error("Passwords doesn't match!")
         };
-        let acc = { firstname, lastname, email, password, birthday }
+        let acc = { firstname, lastname, email, password, birthday, avatar }
         let res = await fetch(`http://localhost:10001/api/v1/auth/update/myprofile`, {
             method: 'PATCH',
             headers: {
@@ -74,6 +74,7 @@ export function Profile() {
             headers: {
                 'authorization': `bearer ${localStorage.getItem("jwt")}`
             }
+
 
         });
         if (resp.ok) {
@@ -102,7 +103,7 @@ export function Profile() {
                             <div id="chooseavatar">
                                 <div id="button-container">
                                     {isImgClicked === true ? <img src={photo} border="0" width="300px" height="150px" />
-                                        : <img id="avataruploadphoto" src={Avatar} border="0" />
+                                        : <img id="avataruploadphoto" src={profilepic} border="0" />
                                     }
                                     <label for="uploadbtn" id="btn-container">Upload Image</label>
                                     <input type="file" id="uploadbtn" onClick={() => { setImgClicked(true) }} onChange={imgUpl} />

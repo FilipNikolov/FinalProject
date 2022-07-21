@@ -18,6 +18,7 @@ const UpdateProfile = {
     password: 'required|string',
     email: 'required|string',
     birthday: 'required|string',
+    avatar: 'requied|string'
 
 };
 

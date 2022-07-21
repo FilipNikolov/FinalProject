@@ -7,6 +7,7 @@ const Account = mongoose.model(
     password: String,
     email: String,
     birthday: Date,
+    avatar: String
 },
     'accounts'
 );

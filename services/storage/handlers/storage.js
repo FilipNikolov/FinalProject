@@ -1,5 +1,6 @@
 const fs = require("fs");
 const { makeID } = require("../../../pkg/strings");
+const config = require("../../../pkg/config");
 
 const DATA_SIZE = 1048576;
 const DATA_TYPE = ["image/jpeg", "image/png", "image/pjpeg", "image/gif", "image/jpg"];

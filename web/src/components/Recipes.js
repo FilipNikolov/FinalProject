@@ -7,6 +7,7 @@ import Moment from "moment";
 import TrashCan from "../imgs/icon_trashcan.svg";
 import Back from "../imgs/icon_back_white.svg";
 
+
 export const Recipes = () => {
     const [recipes, setRecipes] = useState([]);
     const [clickonRecipe, setClickonRecipe] = useState(false);
@@ -22,12 +23,13 @@ export const Recipes = () => {
 
     const [photo, setPhoto] = useState();
     const [docs, setDocs] = useState();
+    const [img, setImg] = useState("");
 
     const imgUpload = new FormData();
     imgUpload.append("document", docs);
 
     const imgUpl = (e) => {
-        setPhoto(URL.createObjectURL(e.target.files[0]));
+        setPhoto(URL.createObjectURL(e.target.files));
         setDocs(e.target.files[0]);
         console.log(setDocs)
     };
@@ -88,7 +90,6 @@ export const Recipes = () => {
         });
 
         result = await result.json();
-
         let resp = await fetch('http://localhost:10003/api/v1/storage', {
             method: 'POST',
             body: imgUpload,
@@ -106,6 +107,7 @@ export const Recipes = () => {
         } else {
             console.log(resp)
         }
+
     };
     const EditRecipe = (r) => {
         setClickonRecipe(true);
@@ -116,7 +118,7 @@ export const Recipes = () => {
         setPortion(r.numberofportion);
         setDescription(r.description);
         setSelectRecipe(r.recipe);
-        setPhotopath(r.photopath)
+        setImg(r.photopath);
     };
 
 
@@ -134,11 +136,10 @@ export const Recipes = () => {
                             <div id="create-container">
                                 <div id="image-container">
                                     <span>Recipe Image</span>
-                                    {isImgClicked === true ? <img src={photo} border="0" width="300px" height="150px" />
-                                        : <img id="recipeuploadphoto" src={photopath} border="0" width="300px" height="150px" />
-                                    }
+                                    {isImgClicked === true ? <img src="photo" border="0" width="300px" height="150px" /> :
+                                        <img src={photopath} border="0" width="300px" height="150px" />}
                                     <label for="uploadbtn" id="btn-container">Upload Image</label>
-                                    <input type="file" id="uploadbtn" onClick={() => { setImgClicked(true) }} onChange={imgUpl} />
+                                    <input type="file" id="uploadbtn" onClick={setImgClicked(true)} onChange={imgUpl} />
                                 </div>
                                 <div id="recipe-info">
                                     <div id="recipetitle">

@@ -134,9 +134,6 @@
     font-weight: bolder;
   }
 
-    #chooseavatar{
-   
-    }
     #chooseavatar img[src]{
       border: 1px solid #A5A5A5 ;
       border-radius: 50%;
@@ -146,9 +143,9 @@
   }
   #button-container{
     padding-top: 20px;
-  }
-  #avataruploadphoto{
-          display: flex;
-      justify-content: center;
-      align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap:50px
   }
