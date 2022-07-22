@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Nav } from "./Nav";
 import "../css/recipes.css";
 import Plus from "../imgs/icon_plus_white.svg";
@@ -9,9 +10,13 @@ import Back from "../imgs/icon_back_white.svg";
 
 
 export const Recipes = () => {
+    const navigator = useNavigate();
+
+
+
     const [recipes, setRecipes] = useState([]);
     const [clickonRecipe, setClickonRecipe] = useState(false);
-    const [isImgClicked, setImgClicked] = useState(false);
+    const [isImgClicked, setIsImgClicked] = useState(false);
     const [recipe, setSelectRecipe] = useState("");
     const [_id, setId] = useState("");
     const [photopath, setPhotopath] = useState("");
@@ -21,15 +26,15 @@ export const Recipes = () => {
     const [numberofportion, setPortion] = useState("");
     const [description, setDescription] = useState("");
 
-    const [photo, setPhoto] = useState();
+    const [photo, setPhoto] = useState("");
     const [docs, setDocs] = useState();
-    const [img, setImg] = useState("");
+
 
     const imgUpload = new FormData();
     imgUpload.append("document", docs);
 
     const imgUpl = (e) => {
-        setPhoto(URL.createObjectURL(e.target.files));
+        setPhoto(URL.createObjectURL(e.target.files[0]));
         setDocs(e.target.files[0]);
         console.log(setDocs)
     };
@@ -48,9 +53,9 @@ export const Recipes = () => {
                 }
             });
             let data = await res.json();
-            // data.forEach(item => {
-            //     item.photopath = "http://localhost:10003/" + item.photopath;
-            // });
+            data.forEach(item => {
+                item.photopath = "http://localhost:10003/" + item.photopath;
+            });
             setRecipes(data);
             setId(data[0]._id)
             setPhotopath(data.photopath)
@@ -76,21 +81,11 @@ export const Recipes = () => {
         })
         res = await res.json()
         getPosts()
-    }
+    };
     const updateRecipe = async (id) => {
         let onerecipe = { title, type, timetoprepare, numberofportion, description, recipe, photopath };
-        let result = await fetch('http://localhost:10002/api/v1/recipes/' + id, {
-            method: 'PATCH',
-            body: JSON.stringify(onerecipe),
-            headers: {
-                'content-type': 'application/json',
-                'authorization': `bearer ${localStorage.getItem("jwt")}`,
 
-            },
-        });
-
-        result = await result.json();
-        let resp = await fetch('http://localhost:10003/api/v1/storage', {
+        let resp = await fetch('http://localhost:10003/api/v1/storage?key=document', {
             method: 'POST',
             body: imgUpload,
             headers: {
@@ -100,13 +95,31 @@ export const Recipes = () => {
         });
         if (resp.ok) {
             let json = await resp.json();
-            photo = json.file_name;
+            photopath = json.file_name;
 
             console.log(json)
 
         } else {
             console.log(resp)
         }
+
+        let res = await fetch('http://localhost:10002/api/v1/recipes' + id, {
+            method: 'PATCH',
+            body: JSON.stringify(onerecipe),
+            headers: {
+                'content-type': 'application/json',
+                'authorization': `bearer ${localStorage.getItem("jwt")}`
+            }
+
+        });
+
+        if (res.ok && resp.ok) {
+            res = await res.json();
+            localStorage.setItem("recipes", res)
+
+        }
+        navigator('/recipes');
+
 
     };
     const EditRecipe = (r) => {
@@ -118,7 +131,7 @@ export const Recipes = () => {
         setPortion(r.numberofportion);
         setDescription(r.description);
         setSelectRecipe(r.recipe);
-        setImg(r.photopath);
+        setPhoto(r.photopath);
     };
 
 
@@ -136,10 +149,10 @@ export const Recipes = () => {
                             <div id="create-container">
                                 <div id="image-container">
                                     <span>Recipe Image</span>
-                                    {isImgClicked === true ? <img src="photo" border="0" width="300px" height="150px" /> :
-                                        <img src={photopath} border="0" width="300px" height="150px" />}
+                                    <img src={photopath} border="0" width="300px" height="150px" />
+
                                     <label for="uploadbtn" id="btn-container">Upload Image</label>
-                                    <input type="file" id="uploadbtn" onClick={setImgClicked(true)} onChange={imgUpl} />
+                                    <input type="file" id="uploadbtn" onClick={() => { setIsImgClicked(true) }} onChange={imgUpl} />
                                 </div>
                                 <div id="recipe-info">
                                     <div id="recipetitle">

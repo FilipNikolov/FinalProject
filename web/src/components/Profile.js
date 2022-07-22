@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Nav } from "./Nav";
 import "../css/profile.css";
 import Moment from "moment";
-import profilepic from "../imgs/defaultavatar.jpg";
+import Avatar from "../imgs/defaultavatar.jpg";
+
 
 export function Profile() {
     const [firstname, setFirstname] = useState("");
@@ -36,12 +37,15 @@ export function Profile() {
                 }
             });
             let data = await res.json();
+            // data.forEach(item => {
+            //     item.avatar = "http://localhost:10003/" + item.avatar;
+            // });
+            setAvatar(data.avatar);
             setFirstname(data.firstname);
             setLastname(data.lastname);
             setEmail(data.email);
             setBirthday(data.birthday);
-            setAvatar(data.avatar);
-
+            console.log(avatar)
         } catch (err) {
             console.log(err);
         }
@@ -65,9 +69,6 @@ export function Profile() {
 
             body: JSON.stringify(acc)
         })
-
-        let data = await res.json()
-        console.log(data)
         let resp = await fetch('http://localhost:10003/api/v1/storage', {
             method: 'POST',
             body: imgUpload,
@@ -75,16 +76,12 @@ export function Profile() {
                 'authorization': `bearer ${localStorage.getItem("jwt")}`
             }
 
-
         });
-        if (resp.ok) {
-            let json = await resp.json();
-            photo = json.file_name;
-        } else {
-            console.log(resp)
-        }
+        let json = await resp.json();
+        avatar = json.file_name;
 
 
+        let data = await res.json()
     }
 
     return (
@@ -103,7 +100,7 @@ export function Profile() {
                             <div id="chooseavatar">
                                 <div id="button-container">
                                     {isImgClicked === true ? <img src={photo} border="0" width="300px" height="150px" />
-                                        : <img id="avataruploadphoto" src={profilepic} border="0" />
+                                        : <img id="avataruploadphoto" src={Avatar} border="0" width="300px" height="150px" />
                                     }
                                     <label for="uploadbtn" id="btn-container">Upload Image</label>
                                     <input type="file" id="uploadbtn" onClick={() => { setImgClicked(true) }} onChange={imgUpl} />

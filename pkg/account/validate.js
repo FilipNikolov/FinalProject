@@ -7,6 +7,7 @@ const Account = {
     repeatpassword: 'required|string',
     email: 'required|string',
     birthday: 'required|date',
+    avatar: 'string'
 };
 const AccountLogin = {
     email: 'required|email',
@@ -18,7 +19,7 @@ const UpdateProfile = {
     password: 'required|string',
     email: 'required|string',
     birthday: 'required|string',
-    avatar: 'requied|string'
+    avatar: 'string'
 
 };
 
