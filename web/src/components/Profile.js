@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Nav } from "./Nav";
 import "../css/profile.css";
 import Moment from "moment";
-import Avatar from "../imgs/defaultavatar.jpg";
+import defaultAvatar from "../imgs/defaultavatar.jpg";
 
 
 export function Profile() {
@@ -13,10 +13,10 @@ export function Profile() {
     const [repeatpassword, setRepeatpassword] = useState("");
     const [birthday, setBirthday] = useState("");
     const [avatar, setAvatar] = useState("");
-    const [isImgClicked, setImgClicked] = useState(false);
 
-    const [photo, setPhoto] = useState();
+
     const [docs, setDocs] = useState();
+    const [photo, setPhoto] = useState();
 
     const imgUpload = new FormData();
     imgUpload.append("document", docs);
@@ -37,28 +37,34 @@ export function Profile() {
                 }
             });
             let data = await res.json();
-            // data.forEach(item => {
-            //     item.avatar = "http://localhost:10003/" + item.avatar;
-            // });
             setAvatar(data.avatar);
             setFirstname(data.firstname);
             setLastname(data.lastname);
             setEmail(data.email);
             setBirthday(data.birthday);
-            console.log(avatar)
+
         } catch (err) {
             console.log(err);
         }
     };
-    useEffect(() => {
-        getUser()
-    }, [])
+
 
     const UpdateProfile = async (e) => {
         e.preventDefault();
         if (password !== repeatpassword) {
             throw new Error("Passwords doesn't match!")
-        };
+        }
+
+        let avatarRes = await fetch('http://localhost:10003/api/v1/storage', {
+            method: 'POST',
+            body: imgUpload,
+            headers: {
+                'authorization': `bearer ${localStorage.getItem("jwt")}`
+            }
+
+        })
+        let json = await avatarRes.json()
+        setAvatar(json.file_name)
         let acc = { firstname, lastname, email, password, birthday, avatar }
         let res = await fetch(`http://localhost:10001/api/v1/auth/update/myprofile`, {
             method: 'PATCH',
@@ -69,21 +75,11 @@ export function Profile() {
 
             body: JSON.stringify(acc)
         })
-        let resp = await fetch('http://localhost:10003/api/v1/storage', {
-            method: 'POST',
-            body: imgUpload,
-            headers: {
-                'authorization': `bearer ${localStorage.getItem("jwt")}`
-            }
 
-        });
-        let json = await resp.json();
-        avatar = json.file_name;
-
-
-        let data = await res.json()
-    }
-
+    };
+    useEffect(() => {
+        getUser()
+    }, [])
     return (
         <>   <Nav />
             <div id="profilepage">
@@ -99,11 +95,10 @@ export function Profile() {
                         <form className="profile-form" onSubmit={UpdateProfile}>
                             <div id="chooseavatar">
                                 <div id="button-container">
-                                    {isImgClicked === true ? <img src={photo} border="0" width="300px" height="150px" />
-                                        : <img id="avataruploadphoto" src={Avatar} border="0" width="300px" height="150px" />
-                                    }
+                                    <img id="avataruploadphoto" src={photo ? photo : "http://localhost:10003/" + avatar} border="0" width="300px" height="150px" />
+
                                     <label for="uploadbtn" id="btn-container">Upload Image</label>
-                                    <input type="file" id="uploadbtn" onClick={() => { setImgClicked(true) }} onChange={imgUpl} />
+                                    <input type="file" id="uploadbtn" onChange={imgUpl} />
                                 </div>
                             </div>
                             <div id="changing-area">
@@ -117,7 +112,7 @@ export function Profile() {
 
                                     <span class="inputtext">Password</span>
                                     <input type="password" name="password" value={password} placeholder="Type New Password" onChange={(e) => { setPassword(e.target.value) }}></input>
-                                    <button type="submit" id="save-btn">UPDATE</button>
+                                    <button type="submit" id="save-btn" onClick={(e) => { UpdateProfile(e) }}>UPDATE</button>
                                 </div>
                                 <div id="profilerightside">
                                     <span class="inputtext" >Last Name</span>

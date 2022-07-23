@@ -142,13 +142,13 @@
  border: 1px solid #A5A5A5;
  background-color: #F0EFEA;
  border-radius: 5px;
+ padding-left: 7px;
 }
 .login-area input:focus{
-
-  outline:none;
+outline:none;
 }
 ::placeholder{
- padding: 10px;
+ 
  font-family: 'Roboto', sans-serif;
  font-weight: bold;
  color: #A5A5A5;;

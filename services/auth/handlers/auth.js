@@ -70,6 +70,7 @@ const updateprofile = async (req, res) => {
     } catch (err) {
         console.log(err);
         return res.status(err.code).send(err.error);
+
     }
 };
 

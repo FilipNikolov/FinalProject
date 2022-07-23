@@ -90,23 +90,23 @@ export const CreateAcc = () => {
                                 <div id="createacc-area">
                                     <div id="leftside">
                                         <span class="inputtxt">First Name</span>
-                                        <input type="text" name="firstname" value={regData.firstname} onChange={inputChange} placeholder="First Name"></input>
+                                        <input type="text" name="firstname" value={regData.firstname} onChange={inputChange} placeholder="First Name" autocomplete="off"></input>
 
                                         <span class="inputtxt">Email</span>
-                                        <input type="email" name="email" value={regData.email} onChange={inputChange} placeholder="Email"></input>
+                                        <input type="email" name="email" value={regData.email} onChange={inputChange} placeholder="Email" autocomplete="off"></input>
 
 
                                         <span class="inputtxt">Password</span>
-                                        <input type="password" name="password" value={regData.password} onChange={inputChange} placeholder="Password"></input>
+                                        <input type="password" name="password" value={regData.password} onChange={inputChange} placeholder="Password" autocomplete="off"></input>
                                         <button type="submit" id="acc-btn">CREATE ACCOUNT</button>
                                     </div>
                                     <div id="rightside">
                                         <span class="inputtxt">Last Name</span>
-                                        <input type="text" name="lastname" value={regData.lastname} onChange={inputChange} placeholder="Last Name"></input>
+                                        <input type="text" name="lastname" value={regData.lastname} onChange={inputChange} placeholder="Last Name" autocomplete="off"></input>
                                         <span class="inputtxt">Birthday</span>
-                                        <input type="date" name="birthday" id="date" value={Moment(new Date(regData.birthday)).format("yyyy-MM-DD")} onChange={inputChange} placeholder="00-00-0000"></input>
+                                        <input type="date" name="birthday" id="date" value={Moment(new Date(regData.birthday)).format("yyyy-MM-DD")} onChange={inputChange} placeholder="00-00-0000" autocomplete="off"></input>
                                         <span class="inputtxt">Repeat Password</span>
-                                        <input type="password" name="repeatpassword" value={regData.repeatpassword} onChange={inputChange} placeholder="Repeat Password"></input>
+                                        <input type="password" name="repeatpassword" value={regData.repeatpassword} onChange={inputChange} placeholder="Repeat Password" autocomplete="off"></input>
 
                                     </div>
                                 </div>
