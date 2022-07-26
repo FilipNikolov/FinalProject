@@ -38,11 +38,6 @@ export const Recipes = () => {
         setDocs(e.target.files[0]);
         console.log(setDocs)
     };
-
-    useEffect(() => {
-        getPosts()
-    }, [])
-
     const getPosts = async (id) => {
         try {
             let res = await fetch('http://localhost:10002/api/v1/recipes', {
@@ -53,9 +48,6 @@ export const Recipes = () => {
                 }
             });
             let data = await res.json();
-            data.forEach(item => {
-                item.photopath = "http://localhost:10003/" + item.photopath;
-            });
             setRecipes(data);
             setId(data[0]._id)
             setPhotopath(data.photopath)
@@ -70,6 +62,9 @@ export const Recipes = () => {
         }
     };
 
+    useEffect(() => {
+        getPosts()
+    }, [])
     const deletePost = async (id) => {
         let res = await fetch('http://localhost:10002/api/v1/recipes/' + id, {
             method: 'DELETE',
@@ -83,42 +78,38 @@ export const Recipes = () => {
         getPosts()
     };
     const updateRecipe = async (id) => {
-        let onerecipe = { title, type, timetoprepare, numberofportion, description, recipe, photopath };
 
-        let resp = await fetch('http://localhost:10003/api/v1/storage?key=document', {
-            method: 'POST',
-            body: imgUpload,
-            headers: {
-                'authorization': `bearer ${localStorage.getItem("jwt")}`
-            }
+        if (isImgClicked === true) {
+            let resp = await fetch(`http://localhost:10003/api/v1/storage`, {
+                method: 'POST',
+                body: imgUpload,
+                headers: {
+                    'authorization': `bearer ${localStorage.getItem("jwt")}`
+                }
 
-        });
-        if (resp.ok) {
-            let json = await resp.json();
-            photopath = json.file_name;
-
-            console.log(json)
-
-        } else {
-            console.log(resp)
+            })
+            let json = await resp.json()
+            photopath = json.file_name
         }
-
-        let res = await fetch('http://localhost:10002/api/v1/recipes' + id, {
+        let onerecipe = { title, type, timetoprepare, numberofportion, description, recipe, photopath };
+        let res = await fetch(`http://localhost:10002/api/v1/recipes` + id, {
             method: 'PATCH',
             body: JSON.stringify(onerecipe),
             headers: {
                 'content-type': 'application/json',
-                'authorization': `bearer ${localStorage.getItem("jwt")}`
+                'authorization': `bearer ${localStorage.getItem("jwt")}`,
+                'Access-Control-Allow-Credentials': true
+
+
             }
 
-        });
+        })
 
-        if (res.ok && resp.ok) {
-            res = await res.json();
-            localStorage.setItem("recipes", res)
-
+        if (res.ok) {
+            let data = await res.json()
+            console.log(data);
         }
-        navigator('/recipes');
+
 
 
     };
@@ -131,7 +122,7 @@ export const Recipes = () => {
         setPortion(r.numberofportion);
         setDescription(r.description);
         setSelectRecipe(r.recipe);
-        setPhoto(r.photopath);
+        setPhotopath(r.photopath);
     };
 
 
@@ -149,8 +140,8 @@ export const Recipes = () => {
                             <div id="create-container">
                                 <div id="image-container">
                                     <span>Recipe Image</span>
-                                    <img src={photopath} border="0" width="300px" height="150px" />
-
+                                    {isImgClicked === true ? <img src={photo} border="0" width="300px" height="150px" />
+                                        : <img src={"http://localhost:10003/" + photopath} border="0" width="300px" height="150px" />}
                                     <label for="uploadbtn" id="btn-container">Upload Image</label>
                                     <input type="file" id="uploadbtn" onClick={() => { setIsImgClicked(true) }} onChange={imgUpl} />
                                 </div>
@@ -202,7 +193,7 @@ export const Recipes = () => {
                         <div id="recipes-line">
                             <h1 id="title"> My Recipes</h1>
                             <div id="recipesline"></div>
-                            <Link to="/recipes/create"><img id="plus-icon" src={Plus} /></Link>
+                            <Link to="/recipes/create"><img id="plus-icon" src={Plus} alt="" /></Link>
                         </div>
                         <div id="titles-container">
                             <div id="container-left">
@@ -228,7 +219,7 @@ export const Recipes = () => {
                                             <li id="recipe-date" >{Moment(new Date(recipe.createdon)).format("DD.MM.yyyy")}</li>
                                         </ul>
                                         <ul id="delete-container">
-                                            <button type="submit" id="recipe-delete" onClick={() => { deletePost(recipe._id); window.location.reload() }} ><img src={TrashCan} /></button>
+                                            <button type="submit" id="recipe-delete" onClick={() => { deletePost(recipe._id); window.location.reload() }} ><img src={TrashCan} alt="" /></button>
                                         </ul>
                                     </div>
 

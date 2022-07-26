@@ -51,30 +51,37 @@ export function Profile() {
 
     const UpdateProfile = async (e) => {
         e.preventDefault();
-        if (password !== repeatpassword) {
-            throw new Error("Passwords doesn't match!")
+        try {
+            if (password !== repeatpassword) {
+                throw new Error("Passwords doesn't match!")
+            };
+            // let avatarRes = await fetch('http://localhost:10003/api/v1/storage', {
+            //     method: 'POST',
+            //     body: imgUpload,
+            //     headers: {
+            //         'authorization': `bearer ${localStorage.getItem("jwt")}`
+            //     }
+
+            // })
+            // let json = await avatarRes.json()
+            // setAvatar(json.file_name)
+            let acc = { firstname, lastname, email, password, birthday, avatar }
+            let res = await fetch(`http://localhost:10001/api/v1/auth/update/myprofile`, {
+                method: 'PATCH',
+                headers: {
+                    'content-type': 'application/json',
+                    'authorization': `bearer ${localStorage.getItem("jwt")}`
+                },
+
+                body: JSON.stringify(acc)
+            })
+            // if (avatarRes.ok && res.ok) {
+            //     res = await res.json();
+            // }
+            navigator('/recipes');
+        } catch (err) {
+            alert(err)
         }
-
-        let avatarRes = await fetch('http://localhost:10003/api/v1/storage', {
-            method: 'POST',
-            body: imgUpload,
-            headers: {
-                'authorization': `bearer ${localStorage.getItem("jwt")}`
-            }
-
-        })
-        let json = await avatarRes.json()
-        setAvatar(json.file_name)
-        let acc = { firstname, lastname, email, password, birthday, avatar }
-        let res = await fetch(`http://localhost:10001/api/v1/auth/update/myprofile`, {
-            method: 'PATCH',
-            headers: {
-                'content-type': 'application/json',
-                'authorization': `bearer ${localStorage.getItem("jwt")}`
-            },
-
-            body: JSON.stringify(acc)
-        })
 
     };
     useEffect(() => {
