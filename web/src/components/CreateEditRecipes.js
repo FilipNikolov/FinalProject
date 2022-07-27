@@ -108,7 +108,7 @@ export const CreateEditRecipes = () => {
                             <div id="recipe-info">
                                 <div id="recipetitle">
                                     <span>Recipe Title</span>
-                                    <input type="text" name="title" value={RecipeData.title} onChange={inputChange} />
+                                    <input type="text" name="title" value={RecipeData.title} onChange={inputChange} autocomplete="off" />
                                 </div>
                                 <div id="row-container">
                                     <div className="containers">
@@ -123,16 +123,16 @@ export const CreateEditRecipes = () => {
                                     </div>
                                     <div className="containers">
                                         <span>Preparation Time</span>
-                                        <input type="text" name="timetoprepare" value={RecipeData.timetoprepare} onChange={inputChange} />
+                                        <input type="text" name="timetoprepare" value={RecipeData.timetoprepare} onChange={inputChange} autocomplete="off" />
                                     </div>
                                     <div className="containers">
                                         <span>No. People</span>
-                                        <input type="text" name="numberofportion" value={RecipeData.numberofportion} onChange={inputChange} />
+                                        <input type="number" min="1" max="6" name="numberofportion" value={RecipeData.numberofportion} onChange={inputChange} autocomplete="off" />
                                     </div>
                                 </div>
                                 <div id="recipedescription">
                                     <span>Short Description</span>
-                                    <textarea name="description" value={RecipeData.description} onChange={inputChange} ></textarea>
+                                    <textarea name="description" value={RecipeData.description} onChange={inputChange} autocomplete="off"></textarea>
                                 </div>
                                 <div>
                                     <button type="submit" id="btnsave">Save</button>

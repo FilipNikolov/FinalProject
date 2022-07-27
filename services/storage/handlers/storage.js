@@ -15,6 +15,7 @@ const upload = async (req, res) => {
     }
 
     const userDir = `user_${req.user.id}`;
+    // const userDir = `user`;
     const userDirPath = `${__dirname}/../uploads/${userDir}`;
 
     if (!fs.existsSync(userDirPath)) {

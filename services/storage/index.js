@@ -15,15 +15,15 @@ api.use(cors({
 var dir = path.join(__dirname, 'uploads');
 api.use(express.static(dir));
 
-// api.use(jwt({
-//     algorithms: ['HS256'],
-//     secret: config.get('security').jwt_key,
-// }).unless({
-//     path: [
-//         '/api/v1/storage/:filename',
+api.use(jwt({
+    algorithms: ['HS256'],
+    secret: config.get('security').jwt_key,
+}).unless({
+    path: [
+        '/api/v1/storage/:filename',
 
-//     ]
-// }));
+    ]
+}));
 
 api.use(fileUpload());
 api.post('/api/v1/storage/uploadavatar', storage.uploadAvatar)

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Nav } from "./Nav";
 import "../css/recipes.css";
 import Plus from "../imgs/icon_plus_white.svg";
@@ -79,20 +79,20 @@ export const Recipes = () => {
     };
     const updateRecipe = async (id) => {
 
-        if (isImgClicked === true) {
-            let resp = await fetch(`http://localhost:10003/api/v1/storage`, {
-                method: 'POST',
-                body: imgUpload,
-                headers: {
-                    'authorization': `bearer ${localStorage.getItem("jwt")}`
-                }
 
-            })
-            let json = await resp.json()
-            photopath = json.file_name
-        }
+        let resp = await fetch('http://localhost:10003/api/v1/storage', {
+            method: 'POST',
+            body: imgUpload,
+            headers: {
+                'authorization': `bearer ${localStorage.getItem("jwt")}`
+            }
+
+        })
+
+        let json = await resp.json()
+        photopath = json.file_name;
         let onerecipe = { title, type, timetoprepare, numberofportion, description, recipe, photopath };
-        let res = await fetch(`http://localhost:10002/api/v1/recipes` + id, {
+        let res = await fetch('http://localhost:10002/api/v1/recipes/' + id, {
             method: 'PATCH',
             body: JSON.stringify(onerecipe),
             headers: {
@@ -104,11 +104,9 @@ export const Recipes = () => {
             }
 
         })
+        let data = await res.json()
+        console.log(data);
 
-        if (res.ok) {
-            let data = await res.json()
-            console.log(data);
-        }
 
 
 

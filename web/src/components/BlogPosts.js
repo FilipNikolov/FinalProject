@@ -73,7 +73,11 @@ export const Blogposts = () => {
                                                 </div>
                                                 <div class="portion-container">
                                                     <img src={plateIcon} alt="" class="icons" />
-                                                    <span class="aboutrecipe">{recipe.numberofportion} persons</span>
+                                                    {recipe.numberofportion <= 1 ?
+                                                        <span class="aboutrecipe">{recipe.numberofportion} person</span>
+                                                        :
+                                                        <span class="aboutrecipe">{recipe.numberofportion} persons</span>
+                                                    }
                                                 </div>
                                                 <div class="grade-container">
                                                     <img src={starIcon} alt="" class="icons" />
@@ -114,7 +118,11 @@ export const Blogposts = () => {
                                                 </div>
                                                 <div class="portion-container">
                                                     <img src={plateIcon} alt="" class="icons" />
-                                                    <span class="aboutrecipe">{recipe.numberofportion} persons</span>
+                                                    {recipe.numberofportion <= 1 ?
+                                                        <span class="aboutrecipe">{recipe.numberofportion} person</span>
+                                                        :
+                                                        <span class="aboutrecipe">{recipe.numberofportion} persons</span>
+                                                    }
                                                 </div>
                                                 <div class="grade-container">
                                                     <img src={starIcon} alt="" class="icons" />
@@ -152,7 +160,11 @@ export const Blogposts = () => {
                                     </div>
                                     <div class="portion-container">
                                         <img src={plateIcon} alt="" class="icons" />
-                                        <span class="aboutrecipe">{popup.numberofportion} persons</span>
+                                        {popup.numberofportion <= 1 ?
+                                            <span class="aboutrecipe">{popup.numberofportion} person</span>
+                                            :
+                                            <span class="aboutrecipe">{popup.numberofportion} persons</span>
+                                        }
                                     </div>
                                     <div class="grade-container">
                                         <img src={starIcon} alt="" class="icons" />
